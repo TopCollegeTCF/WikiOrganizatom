@@ -1,4 +1,4 @@
-# **Ковалёв Михаил - [GitHub][1]**
+# **Ковалёв Михаил - [stupiqplonde][1]**
 [1]: https://github.com/stupiqplonde
 
 
