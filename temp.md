@@ -35,3 +35,7 @@
 | Товар C  | 499 ₽ | ❌ Нет | ⭐⭐⭐☆☆ |
 
 :floppy_disk:
+```python
+def home():
+print("Hello World")
+```
