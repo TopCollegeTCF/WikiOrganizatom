@@ -1,5 +1,5 @@
 # WikiOrganizatom
 documentation &amp; structure 
-<mark>выделенный текст</mark>
+<mark>ПРИВЕТ</mark>
 
 <u>подчеркнутый текст</u>
