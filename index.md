@@ -12,8 +12,7 @@
 Здесь мы учимся работать с Git и GitHub, создаем проекты вместе и делимся знаниями.
 
 ## Проекты
-1. **[class-wiki](https://github.com/[TopCollegeTCF
-]/WikiOrganizatom)** - Вики-страница класса
+1. **[class-wiki](https://github.com/[TopCollegeTCF]/WikiOrganizatom)** - Вики-страница класса
 2. *Ваши проекты будут здесь...*
 
 ## Как начать?
