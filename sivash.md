@@ -17,3 +17,8 @@
 -|-|-
 | +  | +  | +  |
 | -  | -  | -  |
+
+```python
+def home():
+  print("Hello World")
+```
