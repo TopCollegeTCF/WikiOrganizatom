@@ -1,3 +1,3 @@
 # WikiOrganizatom
 documentation &amp; structure
-<u>OUR WIKI</u>
+<mark>выделенный текст</mark>
