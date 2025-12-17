@@ -18,12 +18,13 @@ location: "Симферополь | Кофешоп #3"
 ```
 
 ## 🧠 Мой стек
-```
+
+
 <p align="center">
  <img src="https://skillicons.dev/icons?i=python,django,fastapi,flask,postgresql,mysql,mongodb,redis,
  docker,markdown,git,github,vscode,pycharm,linux,bash&theme=dark&perline=8" />
 </p>
-```
+
 
 ## 🚀 Топ-проекты
 ### **🍕 PizzaTracker 3000** 
