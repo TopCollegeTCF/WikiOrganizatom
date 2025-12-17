@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Top College | Наши проекты</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #f0f0f0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, #667eea, #764ba2, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #a5b4fc;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        /* Team Section */
+        .team-section {
+            margin: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .member-card {
+            background: rgba(25, 25, 35, 0.9);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .member-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.25);
+            border-color: #667eea;
+        }
+
+        .member-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .avatar-container {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid;
+            border-image: linear-gradient(45deg, #667eea, #764ba2) 1;
+        }
+
+        .status {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #10b981;
+            border: 3px solid rgba(25, 25, 35, 0.9);
+            box-shadow: 0 0 10px #10b981;
+        }
+
+        .member-name {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            color: #f8fafc;
+        }
+
+        .member-role {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .tech-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .tech-tag {
+            background: rgba(102, 126, 234, 0.15);
+            color: #a78bfa;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .resume-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .resume-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.7s;
+            z-index: -1;
+        }
+
+        .resume-btn:hover:before {
+            left: 100%;
+        }
+
+        .btn-blue { background: linear-gradient(135deg, #2d9bf0, #1a73e8); }
+        .btn-pink { background: linear-gradient(135deg, #e91e63, #c2185b); }
+        .btn-green { background: linear-gradient(135deg, #4caf50, #388e3c); }
+        .btn-orange { background: linear-gradient(135deg, #ff9800, #f57c00); }
+        .btn-purple { background: linear-gradient(135deg, #9c27b0, #7b1fa2); }
+        .btn-cyan { background: linear-gradient(135deg, #00bcd4, #0097a7); }
+        .btn-lime { background: linear-gradient(135deg, #8bc34a, #689f38); }
+
+        .resume-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Projects Section */
+        .projects-section {
+            margin: 80px 0;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: rgba(25, 25, 35, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            background: rgba(30, 30, 46, 0.9);
+            transform: translateY(-8px);
+            border-color: #667eea;
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #f8fafc;
+        }
+
+        .project-desc {
+            color: #cbd5e1;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-dev { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid #3b82f6; }
+        .status-plan { background: rgba(168, 85, 247, 0.2); color: #a855f7; border: 1px solid #a855f7; }
+
+        /* Contacts Section */
+        .contacts-section {
+            background: rgba(25, 25, 35, 0.8);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 80px 0 40px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 25px;
+            background: rgba(30, 30, 46, 0.6);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(30, 30, 46, 0.9);
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            font-size: 2.2rem;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .contact-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: #f8fafc;
+        }
+
+        .contact-link {
+            color: #a78bfa;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            display: inline-block;
+        }
+
+        .contact-link:hover {
+            color: #8b5cf6;
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+        }
+
+        .footer-text {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #e2e8f0;
+        }
+
+        .footer-note {
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            
+            h1 {
+                font-size: 2.4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 20px;
+            }
+            
+            .projects-grid, .contacts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .logo {
+                font-size: 2.8rem;
+            }
+            
+            .contacts-section {
+                padding: 30px 20px;
+            }
+            
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Particles background effect */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">🚀</div>
+            <h1>Top College | Наши проекты</h1>
+            <p class="tagline">
+                Добро пожаловать на главную страницу нашей студенческой организации! 
+                Мы — сплоченная команда энтузиастов, желающих создавать проекты на стыке технологий и идей. 
+                Здесь вы можете познакомиться с каждым участником и посмотреть его резюме.
+            </p>
+        </header>
+
+        <section class="team-section">
+            <h2 class="section-title">👥 Наша команда</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: #a5b4fc;">
+                Ниже представлены все участники нашей организации. Нажмите на кнопку с именем, чтобы перейти к подробному резюме.
+            </p>
+            
+            <div class="team-grid">
+                <!-- Участник 1 -->
+                <div class="member-card">
+                    <div class="avatar-container">
+                        <img src="https://avatars.githubusercontent.com/u/235081951?s=400&v=4" alt="500EFKA500" class="avatar">
+                        <div class="status"></div>
+                    </div>
+                    <h3 class="member-name">500EFKA500</h3>
+                    <p class="member-role">Full-Stack Разработчик</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">TypeScript</span>
+                    </div>
+                    <a href="500efka500_resume.html" class="resume-btn btn-blue">
+                        <i class="fas fa-file-alt"></i> Резюме
+                    </a>
+                </div>
+
+                <!-- Участник 2 -->
+                <div class="member-card">
+                    <div class="avatar-container">
+                        <img src="https://avatars.githubusercontent.com/u/236754375?s=400&v=4" alt="Alex-hue-dfk" class="avatar">
+                        <div class="status"></div>
+                    </div>
+                    <h3 class="member-name">Alex-hue-dfk</h3>
+                    <p class="member-role">Data Scientist & AI</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">ML</span>
+                        <span class="tech-tag">TensorFlow</span>
+                    </div>
+                    <a href="emil.html" class="resume-btn btn-pink">
+                        <i class="fas fa-robot"></i> Резюме
+                    </a>
+                </div>
+
+                <!-- Участник 3 -->
+                <div class="member-card">
+                    <div class="avatar-container">
+                        <img src="https://avatars.githubusercontent.com/u/145398532?s=400&v=4" alt="Valeev Serj" class="avatar">
+                        <div class="status"></div>
+                    </div>
+                    <h3 class="member-name">Valeev Serj</h3>
+                    <p class="member-role">DevOps & Cloud Engineer</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">Kubernetes</span>
+                    </div>
+                    <a href="gabryelf_resume.html" class="resume-btn btn-green">
+                        <i class="fas fa-server"></i> Резюме
+                    </a>
+                </div>
+
+                <!-- Участник 4 -->
+                <div class="member-card">
+                    <div class="avatar-container">
+                        <img src="https://avatars.githubusercontent.com/u/200377298?s=400&v=4" alt="Goro" class="avatar">
+                        <div class="status"></div>
+                    </div>
+                    <h3 class="member-name">Goro</h3>
+                    <p class="member-role">UX/UI Дизайнер</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Figma</span>
+                        <span class="tech-tag">UI/UX</span>
+                        <span class="tech-tag">Adobe XD</span>
+                    </div>
+                    <a href="sivash.html" class="resume-btn btn-orange">
+                        <i class="fas fa-palette"></i> Резюме
+                    </a>
+                </div>
+
+                <!-- Участник 5 -->
+                <div class="member-card">
+                    <div class="avatar-container">
+                        <img src="https://avatars.githubusercontent.com/u/245714422?s=400&v=4" alt="Hitsuga-K" class="avatar">
+                        <div class="status"></div>
+                    </div>
+                    <h3 class="member-name">Hitsuga-K</h3>
+                    <p class="member-role">Mobile Разработчик</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">React Native</span>
+                        <span class="tech-tag">iOS</span>
+                        <span class="tech-tag">Android</span>
+                    </div>
+                    <a href="hitsuga_k_resume.html" class="resume-btn btn-purple">
+                        <i class="fas fa-mobile-alt"></i> Резюме
+                    </a>
+                </div>
+
+                <!-- Участник 6 -->
+                <div class="member-card">
+                    <div class="avatar-container">
+                        <img src="https://avatars.githubusercontent.com/u/235081090?s=400&v=4" alt="jpwein" class="avatar">
+                        <div class="status"></div>
+                    </div>
+                    <h3 class="member-name">jpwein</h3>
+                    <p class="member-role">Backend Разработчик</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                    </div>
+                    <a href="jpwein_resume.html" class="resume-btn btn-cyan">
+                        <i class="fas fa-code"></i> Резюме
+                    </a>
+                </div>
+
+                <!-- Участник 7 -->
+                <div class="member-card">
+                    <div class="avatar-container">
+                        <img src="https://avatars.githubusercontent.com/u/235036181?s=400&v=4" alt="stupiqplonde" class="avatar">
+                        <div class="status"></div>
+                    </div>
+                    <h3 class="member-name">stupiqplonde</h3>
+                    <p class="member-role">Frontend Разработчик</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Vue.js</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <a href="stupiqplonde.html" class="resume-btn btn-lime">
+                        <i class="fas fa-laptop-code"></i> Резюме
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="projects-section">
+            <h2 class="section-title">🚀 Наши проекты</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: #a5b4fc;">
+                Идеи, над которыми мы работаем или планируем запустить
+            </p>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-icon">🎯</div>
+                    <h3 class="project-title">Стартап Инкубатор</h3>
+                    <p class="project-desc">
+                        Площадка для запуска студенческих стартапов с менторской поддержкой, 
+                        инвестиционными питчами и доступом к ресурсам колледжа.
+                    </p>
+                    <div class="project-status status-dev">В разработке</div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">🤖</div>
+                    <h3 class="project-title">AI Ассистент</h3>
+                    <p class="project-desc">
+                        ИИ-помощник для учебного процесса на основе LLM моделей, 
+                        помогающий студентам с учебными материалами и заданиями.
+                    </p>
+                    <div class="project-status status-plan">Планирование</div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">🌐</div>
+                    <h3 class="project-title">Комьюнити Платформа</h3>
+                    <p class="project-desc">
+                        Веб-платформа для взаимодействия студентов и преподавателей, 
+                        обмена знаниями и организации мероприятий.
+                    </p>
+                    <div class="project-status status-plan">Планирование</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contacts-section">
+            <h2 class="section-title">📬 Контакты организации</h2>
+            
+            <div class="contacts-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h3>GitHub Организации</h3>
+                        <a href="https://github.com/TopCollegeTCF" target="_blank" class="contact-link">
+                            github.com/TopCollegeTCF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h3>Email для связи</h3>
+                        <a href="mailto:gabryelf@yandex.ru" class="contact-link">
+                            gabryelf@yandex.ru
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h3>Присоединиться к команде</h3>
+                        <p class="contact-link">Пиши в Telegram: @gabryelf</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p class="footer-text">🚀 Создаем будущее вместе с кодом и идеями</p>
+            <p class="footer-note">Страница создана с ❤️ силами нашей команды и GitHub Pages</p>
+        </footer>
+    </div>
+
+    <script>
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Анимация появления карточек
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Применяем анимацию к карточкам
+        document.querySelectorAll('.member-card, .project-card, .contact-item').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Создаем частицы для фона
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = Math.random() * 3 + 1 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = `rgba(${Math.floor(Math.random() * 100 + 155)}, ${Math.floor(Math.random() * 100 + 155)}, 255, ${Math.random() * 0.5 + 0.2})`;
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = Math.random() * 100 + 'vh';
+                
+                particlesContainer.appendChild(particle);
+                
+                // Анимация частиц
+                animateParticle(particle);
+            }
+        }
+
+        function animateParticle(particle) {
+            let x = parseFloat(particle.style.left);
+            let y = parseFloat(particle.style.top);
+            let xSpeed = (Math.random() - 0.5) * 0.3;
+            let ySpeed = (Math.random() - 0.5) * 0.3;
+            
+            function move() {
+                x += xSpeed;
+                y += ySpeed;
+                
+                // Отскок от границ
+                if (x <= 0 || x >= 100) xSpeed *= -1;
+                if (y <= 0 || y >= 100) ySpeed *= -1;
+                
+                particle.style.left = x + 'vw';
+                particle.style.top = y + 'vh';
+                
+                requestAnimationFrame(move);
+            }
+            
+            move();
+        }
+
+        // Случайная смена статуса для эффекта "живости"
+        setInterval(() => {
+            const statuses = document.querySelectorAll('.status');
+            statuses.forEach(status => {
+                if (Math.random() > 0.8) {
+                    status.style.animation = 'pulse 1s ease';
+                    setTimeout(() => {
+                        status.style.animation = '';
+                    }, 1000);
+                }
+            });
+        }, 3000);
+
+        // Добавляем стиль для анимации пульсации
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); box-shadow: 0 0 10px #10b981; }
+                50% { transform: scale(1.3); box-shadow: 0 0 20px #10b981; }
+                100% { transform: scale(1); box-shadow: 0 0 10px #10b981; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Инициализация
+        window.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            
+            // Анимация заголовка
+            const title = document.querySelector('h1');
+            title.style.opacity = '0';
+            title.style.transform = 'translateY(-20px)';
+            setTimeout(() => {
+                title.style.transition = 'opacity 1s ease, transform 1s ease';
+                title.style.opacity = '1';
+                title.style.transform = 'translateY(0)';
+            }, 300);
+        });
+    </script>
+</body>
+</html>
