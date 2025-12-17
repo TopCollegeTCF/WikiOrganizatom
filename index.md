@@ -31,7 +31,7 @@
     <br>
     <h3 style="margin-bottom: 8px;">Alex-hue-dfk</h3>
     <p style="color: #666; font-size: 0.9em; margin-bottom: 15px;">Data Scientist & AI</p>
-    <a href="alex-hue-dfk_resume.md">
+    <a href="emil.md">
         <button style="background-color: #e91e63; color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; font-weight: bold; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#c2185b'" onmouseout="this.style.backgroundColor='#e91e63'">
             Резюме
         </button>
@@ -44,7 +44,7 @@
     <br>
     <h3 style="margin-bottom: 8px;">Valeev Serj</h3>
     <p style="color: #666; font-size: 0.9em; margin-bottom: 15px;">DevOps & Cloud Engineer</p>
-    <a href="valeev_serj_resume.md">
+    <a href="gabryelf_resume.md">
         <button style="background-color: #4caf50; color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; font-weight: bold; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#388e3c'" onmouseout="this.style.backgroundColor='#4caf50'">
             Резюме
         </button>
@@ -57,7 +57,7 @@
     <br>
     <h3 style="margin-bottom: 8px;">Goro</h3>
     <p style="color: #666; font-size: 0.9em; margin-bottom: 15px;">UX/UI Дизайнер</p>
-    <a href="goro_resume.md">
+    <a href="sivash.md">
         <button style="background-color: #ff9800; color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; font-weight: bold; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#f57c00'" onmouseout="this.style.backgroundColor='#ff9800'">
             Резюме
         </button>
@@ -96,7 +96,7 @@
     <br>
     <h3 style="margin-bottom: 8px;">stupiqplonde</h3>
     <p style="color: #666; font-size: 0.9em; margin-bottom: 15px;">Frontend Разработчик</p>
-    <a href="stupiqplonde_resume.md">
+    <a href="stupiqplonde.md">
         <button style="background-color: #8bc34a; color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; font-weight: bold; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#689f38'" onmouseout="this.style.backgroundColor='#8bc34a'">
             Резюме
         </button>
