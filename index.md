@@ -44,7 +44,7 @@
     <br>
     <h3 style="margin-bottom: 8px;">Valeev Serj</h3>
     <p style="color: #666; font-size: 0.9em; margin-bottom: 15px;">DevOps & Cloud Engineer</p>
-    <a href="gabryelf_resume.md">
+    <a href="gabryelf_resume.html">
         <button style="background-color: #4caf50; color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; font-weight: bold; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#388e3c'" onmouseout="this.style.backgroundColor='#4caf50'">
             Резюме
         </button>
