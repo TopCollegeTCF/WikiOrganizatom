@@ -1,4 +1,5 @@
-# Эмиль
+# Эмиль [stupiqplonde][1]**
+[1]: https://github.com/Alex-hue-dfk/desktop-tutorial/commits?author=Alex-hue-dfk
 
 
 ## Интересы - много чего
