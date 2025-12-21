@@ -142,10 +142,10 @@ timeline
         Онбординг : GitHub Welcome Bot<br>Авто-приветствие новых участников
         Мониторинг : Activity Dashboard<br>Трекер активности в реальном времени
     section Январь
-        Коммуникация : Discord Integration<br>Авто-уведомления в чат
+        Коммуникация : Game & Work <br> Система очивок и бейджев
         Документация : Wiki Sync Bot<br>Автообновление документации
     section Февраль
-        Аналитика : Metrics Collector<br>Сбор метрик продуктивности
+        Аналитика : Google Chrome Plugins <br>Кастомизатор GitHub черз браузер расширения
         Отчетность : Auto Reports<br>Еженедельные дайджесты
 ```
 
