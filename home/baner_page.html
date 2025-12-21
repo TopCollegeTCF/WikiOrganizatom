@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopCollegeTCF | Код. Команда. Будущее.</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Orbitron:wght@400;700&display=swap');
+        
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #9d4edd;
+            --neon-pink: #ff006e;
+            --dark-bg: #0a0a0f;
+            --card-bg: rgba(255, 255, 255, 0.03);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--dark-bg);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Анимированный фон */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .particle {
+            position: absolute;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        /* Контейнер */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Лого и заголовок */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 4.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            position: relative;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue); }
+            to { text-shadow: 0 0 20px var(--neon-purple), 0 0 40px var(--neon-purple); }
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        /* Карточки */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+        
+        .card:hover::before {
+            left: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 20px 40px rgba(0, 243, 255, 0.2);
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .card-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        /* Кнопки */
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.4);
+        }
+        
+        /* Анимированный текст */
+        .typing-container {
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .typing-text {
+            font-size: 2rem;
+            font-weight: 300;
+            display: inline-block;
+            border-right: 3px solid var(--neon-blue);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--neon-blue) }
+        }
+        
+        /* Футер */
+        .footer {
+            text-align: center;
+            margin-top: 6rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        .pulse {
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .logo { font-size: 3rem; }
+            .typing-text { font-size: 1.5rem; }
+            .card { padding: 1.5rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* Специальный эффект для цифр */
+        .counter {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--neon-pink);
+            display: inline-block;
+            animation: countUp 2s ease-out;
+        }
+        
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Анимированный фон -->
+    <div class="particles" id="particles"></div>
+    
+    <div class="hero">
+        <!-- Логотип -->
+        <div class="logo-container">
+            <div class="logo">TopCollegeTCF</div>
+            <div class="tagline">Код • Команда • Будущее</div>
+        </div>
+        
+        <!-- Анимированный текст -->
+        <div class="typing-container">
+            <div class="typing-text">Где студенты становятся разработчиками</div>
+        </div>
+        
+        <!-- Карточки -->
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🚀</div>
+                <h3 class="card-title">Real Projects</h3>
+                <p class="card-text">Работаем над реальными проектами, которые автоматизируют процессы нашей же организации. Никаких скучных учебных заданий!</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">👨‍💻</div>
+                <h3 class="card-title">Team Experience</h3>
+                <p class="card-text">GitHub Organization — наш виртуальный офис. Учимся работать в команде как в Google и Facebook.</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3 class="card-title">Career Start</h3>
+                <p class="card-text">Каждый коммит = строчка в резюме. Каждый PR = опыт работы. Каждый проект = портфолио.</p>
+            </div>
+        </div>
+        
+        <!-- Цифры -->
+        <div class="typing-container" style="margin-top: 5rem;">
+            <div style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 1rem;">
+                Уже в процессе: первый проект
+            </div>
+            <div class="counter">🤖 GitHub Welcome Bot</div>
+            <div style="font-size: 1rem; margin-top: 1rem; opacity: 0.7;">
+                Автоматизируем процессы TopCollegeTCF
+            </div>
+        </div>
+        
+        <!-- Кнопки -->
+        <div class="cta-buttons">
+            <a href="#join" class="btn btn-primary">Присоединиться</a>
+            <a href="#projects" class="btn btn-secondary">Смотреть проекты</a>
+        </div>
+        
+        <!-- Футер -->
+        <div class="footer">
+            <p>💫 <span class="pulse">Первый шаг к карьере мечты начинается здесь</span> 💫</p>
+            <p style="margin-top: 1rem; font-size: 0.8rem;">TopCollegeTCF © 2025 | GitHub Organization</p>
+        </div>
+    </div>
+    
+    <script>
+        // Создание частиц для фона
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const colors = ['#00f3ff', '#9d4edd', '#ff006e'];
+            
+            for(let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 5 + 2;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.background = color;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // Анимация цифр
+        function animateCounter() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent);
+                let count = 0;
+                const increment = target / 50;
+                
+                const updateCount = () => {
+                    if(count < target) {
+                        count += increment;
+                        counter.textContent = Math.ceil(count);
+                        setTimeout(updateCount, 40);
+                    }
+                };
+                
+                updateCount();
+            });
+        }
+        
+        // Интерактивные карточки
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+        
+        // Плавный скролл для кнопок
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId !== '#') {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Инициализация
+        window.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            animateCounter(); // Раскомментировать если будут цифры для анимации
+        });
+    </script>
+</body>
+</html>
