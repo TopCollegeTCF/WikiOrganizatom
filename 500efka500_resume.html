@@ -1,1 +1,257 @@
-
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резюме | @Gabryelf</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-dark.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #e1e1e6;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(25, 25, 35, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid #444;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #667eea;
+            margin-bottom: 30px;
+        }
+        
+        .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #667eea;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin: 15px 0;
+        }
+        
+        h2 {
+            color: #a78bfa;
+            margin: 25px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #444;
+        }
+        
+        h3 {
+            color: #c4b5fd;
+            margin: 20px 0 10px 0;
+        }
+        
+        .tagline {
+            font-size: 1.2em;
+            color: #94a3b8;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .contacts {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .skill-bar {
+            background: #2d3748;
+            height: 10px;
+            border-radius: 5px;
+            margin: 5px 0 15px 0;
+            overflow: hidden;
+        }
+        
+        .skill-level {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 5px;
+        }
+        
+        .project-card {
+            background: rgba(45, 55, 72, 0.3);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border: 1px solid #4a5568;
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-3px);
+            border-color: #667eea;
+        }
+        
+        .tech-tag {
+            display: inline-block;
+            background: rgba(102, 126, 234, 0.2);
+            color: #a78bfa;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin: 5px 5px 5px 0;
+            font-size: 0.9em;
+            border: 1px solid #667eea;
+        }
+        
+        .back-button {
+            display: inline-block;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 30px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .back-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .highlight {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 3px 8px;
+            border-radius: 5px;
+            color: #a78bfa;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #94a3b8;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .avatar {
+                width: 140px;
+                height: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" alt="Avatar" class="avatar">
+            <h1>@Gabryelf</h1>
+            <p class="tagline">"Если работает — не трогай. Не работает — перезагрузи"</p>
+            <code style="background: #2d3748; padding: 10px; border-radius: 8px; display: inline-block; margin: 10px;">while(alive) { code(); }</code>
+        </div>
+        
+        <div class="contacts">
+            <h2>🔥 Контакты</h2>
+            <p><strong>GitHub:</strong> <a href="https://github.com/Gabryelf" style="color: #a78bfa;">Valeev Serj</a></p>
+            <p><strong>Telegram:</strong> @gabryelf</p>
+            <p><strong>Email:</strong> gabryelf@yandex.ru</p>
+            <p><strong>Локация:</strong> Симферополь | Кофешоп #3</p>
+        </div>
+        
+        <h2>🧠 Мой стек</h2>
+        <p>С# <span class="highlight">30%</span></p>
+        <div class="skill-bar"><div class="skill-level" style="width: 80%;"></div></div>
+        
+        <p>Node.js <span class="highlight">30%</span></p>
+        <div class="skill-bar"><div class="skill-level" style="width: 70%;"></div></div>
+        
+        <p>Python <span class="highlight">30%</span></p>
+        <div class="skill-bar"><div class="skill-level" style="width: 50%;"></div></div>
+        
+        <div style="margin: 20px 0;">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">FastAPI</span>
+            <span class="tech-tag">Git</span>
+        </div>
+        
+        <h2>🚀 Топ-проекты</h2>
+        
+        <div class="project-card">
+            <h3>🍕 PizzaTracker 3000</h3>
+            <p><em>Куда делась моя пицца? Трекинг в реальном времени</em></p>
+            <div style="background: #1a202c; padding: 15px; border-radius: 8px; margin: 10px 0; font-family: monospace;">
+                // Мой любимый кусок кода<br>
+                if (pizza.status === 'delivered') {<br>
+                &nbsp;&nbsp;celebrate();<br>
+                &nbsp;&nbsp;leaveReview(5, '⭐');<br>
+                }
+            </div>
+            <p><strong>Че сделал:</strong> API для трекинга + анимации доставки</p>
+            <p><strong>Результат:</strong> Пицца приезжает на 15% быстрее 🍕</p>
+        </div>
+        
+        
+        <h2>📚 Образование</h2>
+        <p><strong>Топ Колледж</strong> · Факультет магии и кода</p>
+        <p>2022–2026 | Backend-направление</p>
+        <p><strong>Любимый предмет:</strong> "Кофе-брейки и асинхронность"</p>
+        
+        <h2>🏆 Чем горжусь</h2>
+        <ul style="margin-left: 20px; margin-bottom: 20px;">
+            <li>✅ Выиграл хакатон с проектом за 48 часов без сна</li>
+            <li>✅ Мой код работает у 3х друзей (и это успех!)</li>
+            <li>✅ Научил кота нажимать Ctrl+S</li>
+            <li>✅ Закрыл 15 issues в опенсорсе</li>
+            <li>✅ Не сломал прод за 6 месяцев (рекорд!)</li>
+        </ul>
+        
+        <h2>🎧 Вне кода</h2>
+        <p><strong>Музыка:</strong> lo-fi | reggey | punk rock </p>
+        <p><strong>Игры:</strong> Fallout | TES IV | Civilizacion VI </p>
+        <p><strong>Настроение:</strong> <code style="background: #2d3748; padding: 3px 8px; border-radius: 4px;">if(coffee) { "😎" } else { "🤖" }</code></p>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="index.html" class="back-button">🏠 Вернуться на главную</a>
+        </div>
+        
+        <footer>
+            <p>🔄 Последнее обновление: Сегодня утром, после кофе</p>
+            <p>🐛 Известные баги: Иногда путаю `==` и `===`</p>
+        </footer>
+    </div>
+</body>
+</html>
