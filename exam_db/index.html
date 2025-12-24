@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статус студенческих проектов</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1><i class="fas fa-graduation-cap"></i> Дашборд студенческих проектов</h1>
+            <p class="subtitle">Актуальные статусы, достижения и метрики GitHub в реальном времени</p>
+        </div>
+    </header>
 
+    <main class="container">
+        <!-- Фильтры и статистика -->
+        <section class="dashboard-controls">
+            <div class="stats-overview">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <span id="totalStudents">0</span>
+                    <p>Студентов</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-code-branch"></i>
+                    <span id="totalCommits">0</span>
+                    <p>Всего коммитов</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-tasks"></i>
+                    <span id="totalIssues">0</span>
+                    <p>Issues</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-code"></i>
+                    <span id="totalLanguages">0</span>
+                    <p>Языков</p>
+                </div>
+            </div>
+            <div class="filters">
+                <input type="text" id="searchInput" placeholder="Поиск по имени или проекту...">
+                <select id="languageFilter">
+                    <option value="">Все языки</option>
+                    <!-- Языки подгрузятся автоматически -->
+                </select>
+            </div>
+        </section>
+
+        <!-- Контейнер для карточек студентов -->
+        <section class="students-container" id="studentsContainer">
+            <!-- Карточки будут вставлены сюда скриптом -->
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Загружаем данные студентов...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>Данные обновляются автоматически с GitHub API. Последнее обновление: <span id="lastUpdate"></span></p>
+            <p class="github-link">
+                <i class="fab fa-github"></i> Организация:
+                <a href="#" id="orgLink">Ваша организация</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Подключаем скрипты -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
