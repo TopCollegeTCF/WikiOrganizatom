@@ -387,13 +387,20 @@ body {
 }
 
 /* Карточка студента - КОМПАКТНАЯ ВЕРСИЯ */
+/* Увеличенные размеры карточек студентов */
+.students-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
 .student-card {
-    min-width: 280px;
-    max-width: 280px;
-    height: 360px;
+    min-width: 100%;
+    height: 480px;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     overflow: hidden;
     transition: var(--transition-smooth);
     position: relative;
@@ -405,82 +412,149 @@ body {
     animation-delay: calc(var(--card-index, 0) * 0.1s);
 }
 
-.student-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--gradient-primary);
-}
-
-.student-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--primary-color);
-    box-shadow: var(--shadow-glow), var(--shadow-card);
-}
-
-/* Бейдж ранга */
-.rank-badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    padding: 0.4rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #000;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    z-index: 2;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    transition: var(--transition-smooth);
-}
-
-.student-card:hover .rank-badge {
-    transform: scale(1.1);
-}
-
-/* Заголовок карточки */
+/* Увеличенные отступы и размеры внутри карточки */
 .card-header {
-    display: flex;
-    padding: 1.2rem;
-    gap: 1rem;
-    align-items: center;
+    padding: 1.5rem;
+    gap: 1.2rem;
 }
 
 .avatar-container {
-    position: relative;
-    width: 55px;
-    height: 55px;
-    flex-shrink: 0;
+    width: 75px;
+    height: 75px;
 }
 
 .avatar {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
-    border: 2px solid transparent;
+    border: 3px solid transparent;
     background: linear-gradient(white, white) padding-box,
                 var(--gradient-primary) border-box;
-    object-fit: cover;
-    transition: var(--transition-smooth);
 }
 
-.student-card:hover .avatar {
-    transform: scale(1.1);
+.student-info h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
 }
 
-.avatar-status {
-    position: absolute;
-    bottom: 2px;
-    right: 2px;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: 2px solid var(--card-bg);
+.github-link {
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+}
+
+.status-indicator {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+}
+
+/* Проект с увеличенными отступами */
+.project-info {
+    padding: 0 1.5rem 1.2rem;
+}
+
+.project-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    gap: 0.8rem;
+}
+
+.project-info h3 i {
+    font-size: 1rem;
+}
+
+.repo-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    height: 3.6em; /* 3 строки текста */
+}
+
+/* Увеличенные метрики */
+.metrics-grid {
+    gap: 0.8rem;
+}
+
+.metric {
+    padding: 1rem;
+    gap: 0.8rem;
+}
+
+.metric i {
+    font-size: 1.3rem;
+}
+
+.metric-content {
+    gap: 0.3rem;
+}
+
+.metric-value {
+    font-size: 1.3rem;
+}
+
+.metric-label {
+    font-size: 0.85rem;
+}
+
+/* Футер карточки */
+.card-footer {
+    padding: 1rem 1.5rem;
+}
+
+.updated-at {
+    font-size: 0.85rem;
+}
+
+.repo-link {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+}
+
+/* Бейдж ранга увеличен */
+.rank-badge {
+    top: 15px;
+    right: 15px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    gap: 0.5rem;
+}
+
+/* Адаптивность для увеличенных карточек */
+@media (max-width: 1200px) {
+    .students-container {
+        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    }
+    .student-card {
+        height: 460px;
+    }
+}
+
+@media (max-width: 768px) {
+    .students-container {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    .student-card {
+        height: auto;
+        min-height: 440px;
+    }
+    .avatar-container {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .student-card {
+        min-height: 420px;
+    }
+    .card-header {
+        padding: 1.2rem;
+    }
+    .project-info {
+        padding: 0 1.2rem 1rem;
+    }
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .status-high .avatar-status { background: var(--accent-green); }
