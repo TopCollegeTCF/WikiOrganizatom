@@ -135,28 +135,62 @@ function renderStudents(studentsData) {
                 </a>
                 <p class="repo-description">${student.repo.description || 'Описание отсутствует'}</p>
 
-                <div class="metrics-grid">
-                    <div class="metric">
-                        <i class="fas fa-code-commit"></i>
-                        <strong>${student.commitCount}</strong>
-                        <span>Коммитов</span>
-                    </div>
-                    <div class="metric">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <strong>${student.issuesCount}</strong>
-                        <span>Issues</span>
-                    </div>
-                    <div class="metric">
-                        <i class="fas fa-book"></i>
-                        <strong>${student.hasReadme ? '✅' : '❌'}</strong>
-                        <span>README.md</span>
-                    </div>
-                    <div class="metric">
-                        <i class="fas fa-star"></i>
-                        <strong>${student.repo.stargazers_count}</strong>
-                        <span>Звезд</span>
-                    </div>
-                </div>
+                // Замените блок .metrics-grid в renderStudents на этот:
+<div class="metrics-grid">
+    <div class="metric">
+        <div class="metric-header">
+            <i class="fas fa-code-commit"></i>
+            <div class="metric-value">${student.commitCount}</div>
+        </div>
+        <div class="metric-label">Коммитов</div>
+        <div class="metric-bar">
+            <div class="metric-fill" style="width: ${Math.min(student.commitCount, 100)}%"></div>
+        </div>
+    </div>
+    <div class="metric">
+        <div class="metric-header">
+            <i class="fas fa-exclamation-circle"></i>
+            <div class="metric-value">${student.issuesCount}</div>
+        </div>
+        <div class="metric-label">Issues</div>
+        <div class="metric-bar">
+            <div class="metric-fill" style="width: ${Math.min(student.issuesCount * 10, 100)}%"></div>
+        </div>
+    </div>
+    <div class="metric">
+        <div class="metric-header">
+            <i class="fas fa-book"></i>
+            <div class="metric-value">${student.hasReadme ? '✅' : '❌'}</div>
+        </div>
+        <div class="metric-label">README.md</div>
+        <div class="metric-bar">
+            <div class="metric-fill" style="width: ${student.hasReadme ? 100 : 0}%"></div>
+        </div>
+    </div>
+    <div class="metric">
+        <div class="metric-header">
+            <i class="fas fa-star"></i>
+            <div class="metric-value">${student.repo.stargazers_count}</div>
+        </div>
+        <div class="metric-label">Звезд</div>
+        <div class="metric-bar">
+            <div class="metric-fill" style="width: ${Math.min(student.repo.stargazers_count * 20, 100)}%"></div>
+        </div>
+    </div>
+</div>
+
+// И добавьте после блока .metrics-grid:
+<div class="language-chart">
+    ${Object.entries(student.languages)
+        .slice(0, 6) // Показываем топ-6 языков
+        .map(([lang, bytes]) => `
+            <div class="language-bar" 
+                 style="height: ${Math.min(bytes / 1000, 100)}%"
+                 data-lang="${lang}"
+                 title="${lang}: ${bytes} байт">
+            </div>
+        `).join('')}
+</div>
             </div>
 
             <div class="languages-section">
