@@ -1,8 +1,6 @@
 // Конфигурация
 const CONFIG_URL = './config.json'; // Путь к вашему конфигу
 const GITHUB_API_BASE = 'https://api.github.com';
-// ВНИМАНИЕ: Для большего лимита запросов создайте Personal Access Token
-// const GITHUB_TOKEN = 'ваш_токен_здесь'; // Раскомментируйте и используйте, если упретесь в лимиты
 
 // Кэш для данных, чтобы не делать лишние запросы
 let studentsDataCache = [];
@@ -197,14 +195,14 @@ function renderStudents(studentsData) {
 
 // Вспомогательные функции
 function getStatusColor(commitCount) {
-    if (commitCount > 50) return 'status-high';
-    if (commitCount > 20) return 'status-medium';
+    if (commitCount > 20) return 'status-high';
+    if (commitCount > 10) return 'status-medium';
     return 'status-low';
 }
 
 function getStatusText(commitCount) {
-    if (commitCount > 50) return 'Высокая активность';
-    if (commitCount > 20) return 'Средняя активность';
+    if (commitCount > 20) return 'Высокая активность';
+    if (commitCount > 10) return 'Средняя активность';
     return 'Начальный этап';
 }
 
@@ -282,8 +280,6 @@ function getRankBadge(rank) {
     };
     return badges[rank] || badges['trainee'];
 }
-
-// Добавьте в конец script.js
 
 // Функции для скролла
 function initScrollButtons() {
