@@ -1,27 +1,30 @@
+/* style.css - Полностью обновленная версия */
+
 :root {
     --primary-color: #6c5ce7;
     --secondary-color: #a29bfe;
     --dark-bg: #0f172a;
     --darker-bg: #0a0f1c;
-    --card-bg: rgba(30, 41, 59, 0.7);
-    --card-border: rgba(255, 255, 255, 0.1);
+    --card-bg: rgba(30, 41, 59, 0.8);
+    --card-border: rgba(255, 255, 255, 0.08);
     --text-primary: #f8fafc;
-    --text-secondary: #cbd5e1;
+    --text-secondary: #94a3b8;
     --accent-green: #10b981;
     --accent-yellow: #f59e0b;
     --accent-red: #ef4444;
     --accent-cyan: #06b6d4;
     --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    --gradient-dark: linear-gradient(135deg, #141e30 0%, #243b55 100%);
-    --shadow-glow: 0 0 40px rgba(108, 92, 231, 0.2);
-    --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.3);
-    --radius-xl: 24px;
+    --shadow-glow: 0 0 30px rgba(108, 92, 231, 0.15);
+    --shadow-card: 0 10px 25px rgba(0, 0, 0, 0.25);
+    --radius-xl: 20px;
     --radius-lg: 16px;
     --radius-md: 12px;
-    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius-sm: 8px;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Сброс и базовые стили */
 * {
     margin: 0;
     padding: 0;
@@ -29,16 +32,21 @@
 }
 
 body {
-    font-family: 'Inter', 'SF Pro Display', -apple-system, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--dark-bg);
     background-image: 
-        radial-gradient(circle at 10% 20%, rgba(108, 92, 231, 0.1) 0%, transparent 20%),
-        radial-gradient(circle at 90% 80%, rgba(244, 114, 182, 0.1) 0%, transparent 20%);
+        radial-gradient(circle at 0% 0%, rgba(108, 92, 231, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 100% 0%, rgba(244, 114, 182, 0.1) 0%, transparent 50%);
     color: var(--text-primary);
-    line-height: 1.7;
+    line-height: 1.5;
     min-height: 100vh;
     overflow-x: hidden;
-    padding-bottom: 40px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 /* Анимированный фон */
@@ -48,7 +56,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: -2;
     opacity: 0.3;
 }
 
@@ -57,146 +65,133 @@ body {
     width: 100%;
     height: 100%;
     background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
-    mask-image: radial-gradient(circle at center, black 20%, transparent 80%);
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
 }
 
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 30px;
-}
-
-/* Шапка - полностью переработанная */
+/* Шапка сайта */
 .site-header {
-    background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(20px);
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--card-border);
-    padding: 2.5rem 0;
-    margin-bottom: 3rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.site-header::before {
-    content: '';
-    position: absolute;
+    padding: 1.5rem 0;
+    margin-bottom: 2rem;
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: var(--gradient-primary);
+    z-index: 100;
 }
 
 .header-content {
-    text-align: center;
-    position: relative;
-    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .header-icon {
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     background: var(--gradient-primary);
-    border-radius: 50%;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1.5rem;
-    box-shadow: var(--shadow-glow);
-    animation: float 6s ease-in-out infinite;
+    flex-shrink: 0;
+    animation: float 4s ease-in-out infinite;
 }
 
 .header-icon i {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     color: white;
 }
 
 .site-header h1 {
-    font-size: 3.5rem;
-    font-weight: 800;
+    font-size: 1.8rem;
+    font-weight: 700;
     background: linear-gradient(to right, #ffffff, var(--secondary-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 1rem;
-    letter-spacing: -0.5px;
+    margin: 0;
 }
 
 .site-header .subtitle {
-    font-size: 1.3rem;
+    font-size: 0.95rem;
     color: var(--text-secondary);
-    max-width: 700px;
-    margin: 0 auto;
     opacity: 0.9;
 }
 
-/* Панель управления с неоном */
+/* Легенда рангов */
+.rank-legend {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.rank-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.rank-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.teamlead-color { background: linear-gradient(135deg, #FF6B6B, #FF8E8E); }
+.senior-color { background: linear-gradient(135deg, #4ECDC4, #6CE6DE); }
+.mid-color { background: linear-gradient(135deg, #45B7D1, #67D9F3); }
+.junior-color { background: linear-gradient(135deg, #96CEB4, #B8E8D0); }
+.trainee-color { background: linear-gradient(135deg, #FFEAA7, #FFF4D4); }
+
+/* Панель управления */
 .dashboard-controls {
     background: rgba(30, 41, 59, 0.5);
     backdrop-filter: blur(10px);
     border: 1px solid var(--card-border);
-    border-radius: var(--radius-xl);
-    padding: 2.5rem;
-    margin-bottom: 3rem;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
     box-shadow: var(--shadow-card);
-    position: relative;
-    overflow: hidden;
-}
-
-.dashboard-controls::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--gradient-primary);
 }
 
 .stats-overview {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .stat-card {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--card-border);
-    border-radius: var(--radius-lg);
-    padding: 2rem;
+    border-radius: var(--radius-md);
+    padding: 1.2rem;
     text-align: center;
     transition: var(--transition-smooth);
-    position: relative;
-    overflow: hidden;
-}
-
-.stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.6s;
-}
-
-.stat-card:hover::before {
-    left: 100%;
 }
 
 .stat-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-3px);
     border-color: var(--primary-color);
-    box-shadow: 0 15px 35px rgba(108, 92, 231, 0.2);
+    box-shadow: 0 8px 20px rgba(108, 92, 231, 0.1);
 }
 
 .stat-card i {
-    font-size: 2.8rem;
-    margin-bottom: 1.2rem;
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
     display: block;
 }
 
@@ -206,10 +201,10 @@ body {
 .stat-card:nth-child(4) i { color: var(--primary-color); }
 
 .stat-card span {
-    font-size: 3rem;
-    font-weight: 800;
+    font-size: 2rem;
+    font-weight: 700;
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
     background: linear-gradient(to right, #ffffff, var(--secondary-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -217,47 +212,46 @@ body {
 
 .stat-card p {
     color: var(--text-secondary);
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 500;
-    letter-spacing: 0.5px;
 }
 
 /* Фильтры */
 .filters {
     display: flex;
-    gap: 20px;
+    gap: 1rem;
     flex-wrap: wrap;
     align-items: center;
 }
 
 .filter-group {
     flex: 1;
-    min-width: 300px;
+    min-width: 250px;
 }
 
 .filter-group label {
     display: block;
     color: var(--text-secondary);
-    margin-bottom: 0.8rem;
-    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
     font-weight: 500;
 }
 
 #searchInput {
     width: 100%;
-    padding: 1.2rem 1.5rem;
+    padding: 0.9rem 1.2rem;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--card-border);
     border-radius: var(--radius-md);
     color: var(--text-primary);
-    font-size: 1rem;
+    font-size: 0.95rem;
     transition: var(--transition-smooth);
 }
 
 #searchInput:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.15);
     background: rgba(255, 255, 255, 0.08);
 }
 
@@ -267,90 +261,148 @@ body {
 
 #languageFilter {
     width: 100%;
-    padding: 1.2rem 1.5rem;
+    padding: 0.9rem 1.2rem;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--card-border);
     border-radius: var(--radius-md);
     color: var(--text-primary);
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: pointer;
     appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
-    background-position: right 1.5rem center;
-    background-size: 20px;
-    padding-right: 3.5rem;
+    background-position: right 1rem center;
+    background-size: 16px;
+    padding-right: 3rem;
 }
 
-#languageFilter option {
-    background: var(--dark-bg);
-    color: var(--text-primary);
+/* Контейнер студентов с горизонтальным скроллом */
+.students-wrapper {
+    position: relative;
+    margin-bottom: 2rem;
 }
 
-/* Контейнер студентов */
 .students-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-    gap: 2.5rem;
-    animation: fadeIn 0.8s ease-out;
+    display: flex;
+    gap: 1.2rem;
+    overflow-x: auto;
+    padding: 1rem 0;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) rgba(255, 255, 255, 0.05);
 }
 
-.loading, .error-message, .no-results {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 5rem 2rem;
-    background: rgba(30, 41, 59, 0.5);
+.students-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.students-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.students-container::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+.students-container::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* Кнопки навигации для скролла */
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: var(--card-bg);
     border: 1px solid var(--card-border);
-    border-radius: var(--radius-xl);
+    border-radius: 50%;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    z-index: 10;
+    backdrop-filter: blur(10px);
+}
+
+.scroll-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.scroll-left {
+    left: -20px;
+}
+
+.scroll-right {
+    right: -20px;
+}
+
+/* Состояния загрузки и ошибок */
+.loading, .error-message, .no-results {
+    width: 100%;
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
     backdrop-filter: blur(10px);
 }
 
 .loading i {
-    font-size: 4rem;
+    font-size: 2.5rem;
     color: var(--primary-color);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     animation: spin 1.5s linear infinite;
 }
 
 .error-message i {
-    font-size: 4rem;
+    font-size: 2.5rem;
     color: var(--accent-red);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .error-message button {
     background: var(--gradient-primary);
     color: white;
     border: none;
-    padding: 1rem 2.5rem;
+    padding: 0.8rem 2rem;
     border-radius: 50px;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     transition: var(--transition-smooth);
-    letter-spacing: 0.5px;
 }
 
 .error-message button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(108, 92, 231, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(108, 92, 231, 0.3);
 }
 
-/* Карточка студента - супер стильная */
+/* Карточка студента - КОМПАКТНАЯ ВЕРСИЯ */
 .student-card {
+    min-width: 280px;
+    max-width: 280px;
+    height: 360px;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
     overflow: hidden;
     transition: var(--transition-smooth);
-    backdrop-filter: blur(10px);
     position: relative;
-    height: 100%;
     display: flex;
     flex-direction: column;
+    backdrop-filter: blur(10px);
     opacity: 0;
-    animation: cardAppear 0.6s ease-out forwards;
+    animation: cardAppear 0.5s ease-out forwards;
+    animation-delay: calc(var(--card-index, 0) * 0.1s);
 }
 
 .student-card::before {
@@ -359,35 +411,58 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
+    height: 3px;
     background: var(--gradient-primary);
 }
 
 .student-card:hover {
-    transform: translateY(-12px) scale(1.02);
+    transform: translateY(-8px);
     border-color: var(--primary-color);
     box-shadow: var(--shadow-glow), var(--shadow-card);
 }
 
+/* Бейдж ранга */
+.rank-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #000;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: var(--transition-smooth);
+}
+
+.student-card:hover .rank-badge {
+    transform: scale(1.1);
+}
+
+/* Заголовок карточки */
 .card-header {
     display: flex;
-    padding: 2rem;
-    gap: 1.5rem;
+    padding: 1.2rem;
+    gap: 1rem;
     align-items: center;
-    position: relative;
 }
 
 .avatar-container {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 55px;
+    height: 55px;
+    flex-shrink: 0;
 }
 
 .avatar {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 3px solid transparent;
+    border: 2px solid transparent;
     background: linear-gradient(white, white) padding-box,
                 var(--gradient-primary) border-box;
     object-fit: cover;
@@ -395,17 +470,17 @@ body {
 }
 
 .student-card:hover .avatar {
-    transform: rotate(10deg) scale(1.1);
+    transform: scale(1.1);
 }
 
 .avatar-status {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
-    width: 22px;
-    height: 22px;
+    bottom: 2px;
+    right: 2px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    border: 3px solid var(--card-bg);
+    border: 2px solid var(--card-bg);
 }
 
 .status-high .avatar-status { background: var(--accent-green); }
@@ -414,12 +489,16 @@ body {
 
 .student-info {
     flex: 1;
+    min-width: 0; /* Для правильного обрезания текста */
 }
 
 .student-info h2 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     background: linear-gradient(to right, #ffffff, var(--secondary-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -428,263 +507,161 @@ body {
 .github-link {
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.8rem;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 1rem;
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
     transition: var(--transition-smooth);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .github-link:hover {
     color: var(--primary-color);
-    transform: translateX(5px);
 }
 
 .status-indicator {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 0.5rem 1.2rem;
-    border-radius: 50px;
-    font-size: 0.9rem;
+    gap: 0.4rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
     font-weight: 600;
     backdrop-filter: blur(10px);
+    white-space: nowrap;
 }
 
-.status-high { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
-.status-medium { background: rgba(245, 158, 11, 0.2); color: var(--accent-yellow); border: 1px solid rgba(245, 158, 11, 0.3); }
-.status-low { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.3); }
+.status-high { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.2); }
+.status-medium { background: rgba(245, 158, 11, 0.15); color: var(--accent-yellow); border: 1px solid rgba(245, 158, 11, 0.2); }
+.status-low { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.2); }
 
-/* Проект */
-.project-info, .languages-section {
-    padding: 1.5rem 2rem;
+/* Информация о проекте */
+.project-info {
+    padding: 0 1.2rem 1rem;
+    flex: 1;
 }
 
-.project-info h3, .languages-section h4 {
+.project-info h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 1.2rem;
+    gap: 0.5rem;
     color: var(--text-primary);
-    font-size: 1.3rem;
-    font-weight: 600;
 }
 
-.project-info h3 i, .languages-section h4 i {
+.project-info h3 i {
     color: var(--primary-color);
-}
-
-.repo-link {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    text-decoration: none;
-    display: block;
-    margin-bottom: 0.8rem;
-    transition: var(--transition-smooth);
-    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.repo-link:hover {
-    transform: translateX(10px);
+    font-size: 0.9rem;
 }
 
 .repo-description {
     color: var(--text-secondary);
-    font-size: 1rem;
-    margin-bottom: 1.8rem;
-    line-height: 1.6;
-    padding-left: 1rem;
-    border-left: 3px solid var(--primary-color);
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    height: 2.8em; /* 2 строки текста */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
-/* Метрики в виде прогресс-баров */
+/* Метрики */
 .metrics-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
-    margin-top: 1.5rem;
+    gap: 0.6rem;
 }
 
 .metric {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--card-border);
-    border-radius: var(--radius-md);
-    padding: 1.2rem;
+    border-radius: var(--radius-sm);
+    padding: 0.7rem;
     transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
 }
 
 .metric:hover {
     background: rgba(255, 255, 255, 0.05);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
 }
 
-.metric-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.8rem;
-}
-
-.metric-header i {
-    font-size: 1.5rem;
+.metric i {
+    font-size: 1rem;
     color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.metric-content {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
 }
 
 .metric-value {
-    font-size: 2rem;
-    font-weight: 800;
+    font-size: 1.1rem;
+    font-weight: 700;
     color: var(--text-primary);
+    line-height: 1;
 }
 
 .metric-label {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     color: var(--text-secondary);
-    font-weight: 500;
-}
-
-.metric-bar {
-    height: 6px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
-    overflow: hidden;
-    margin-top: 0.8rem;
-}
-
-.metric-fill {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 1.5s ease-out;
-}
-
-.metric:nth-child(1) .metric-fill { background: var(--accent-cyan); }
-.metric:nth-child(2) .metric-fill { background: var(--accent-yellow); }
-.metric:nth-child(3) .metric-fill { background: var(--accent-green); }
-.metric:nth-child(4) .metric-fill { background: var(--accent-red); }
-
-/* Языки с анимированными графиками */
-.language-chart {
-    display: flex;
-    align-items: flex-end;
-    gap: 8px;
-    height: 120px;
-    margin: 1.5rem 0;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: var(--radius-md);
-}
-
-.language-bar {
-    flex: 1;
-    background: var(--gradient-primary);
-    border-radius: 4px 4px 0 0;
-    transition: height 1s ease-out;
-    position: relative;
-    min-height: 4px;
-}
-
-.language-bar:hover {
-    opacity: 0.8;
-}
-
-.language-bar::after {
-    content: attr(data-lang);
-    position: absolute;
-    bottom: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.8rem;
-    color: var(--text-secondary);
+    margin-top: 0.2rem;
     white-space: nowrap;
-}
-
-.language-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-    margin-top: 1rem;
-}
-
-.language-badge {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--card-border);
-    color: var(--text-primary);
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: var(--transition-smooth);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.language-badge:hover {
-    background: var(--gradient-primary);
-    transform: translateY(-3px);
-    border-color: var(--primary-color);
-}
-
-.language-badge::before {
-    content: '●';
-    font-size: 0.8rem;
 }
 
 /* Футер карточки */
 .card-footer {
-    margin-top: auto;
-    padding: 1.5rem 2rem;
+    padding: 0.8rem 1.2rem;
     border-top: 1px solid var(--card-border);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
     background: rgba(255, 255, 255, 0.02);
-}
-
-.footer-links {
-    display: flex;
-    gap: 1.5rem;
-}
-
-.footer-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: var(--transition-smooth);
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-md);
-    background: rgba(255, 255, 255, 0.03);
-}
-
-.footer-links a:hover {
-    color: var(--primary-color);
-    background: rgba(108, 92, 231, 0.1);
-    transform: translateY(-2px);
+    margin-top: auto;
 }
 
 .updated-at {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     color: var(--text-secondary);
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 0.5rem 1rem;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: var(--radius-md);
+    gap: 0.3rem;
+}
+
+.repo-link {
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.8rem;
+    background: rgba(108, 92, 231, 0.1);
+    border-radius: var(--radius-sm);
+    transition: var(--transition-smooth);
+}
+
+.repo-link:hover {
+    background: rgba(108, 92, 231, 0.2);
+    transform: translateY(-1px);
 }
 
 /* Футер сайта */
 .site-footer {
-    margin-top: 5rem;
-    padding: 2.5rem 0;
+    margin-top: 3rem;
+    padding: 1.5rem 0;
     text-align: center;
     color: var(--text-secondary);
     border-top: 1px solid var(--card-border);
@@ -697,8 +674,8 @@ body {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 100px;
-    height: 4px;
+    width: 80px;
+    height: 3px;
     background: var(--gradient-primary);
     border-radius: 0 0 2px 2px;
 }
@@ -706,25 +683,26 @@ body {
 .github-org {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    margin-top: 1rem;
-    padding: 0.8rem 1.5rem;
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+    padding: 0.6rem 1.2rem;
     background: rgba(255, 255, 255, 0.03);
     border-radius: 50px;
     text-decoration: none;
     color: var(--text-primary);
     transition: var(--transition-smooth);
+    font-size: 0.9rem;
 }
 
 .github-org:hover {
     background: rgba(108, 92, 231, 0.1);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
 }
 
 /* Анимации */
 @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+    50% { transform: translateY(-10px); }
 }
 
 @keyframes spin {
@@ -733,14 +711,14 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes cardAppear {
     from { 
         opacity: 0;
-        transform: translateY(30px) scale(0.95);
+        transform: translateY(20px) scale(0.95);
     }
     to { 
         opacity: 1;
@@ -754,85 +732,15 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* Адаптивность */
-@media (max-width: 1200px) {
-    .students-container {
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    }
-}
-
-@media (max-width: 768px) {
-    .site-header h1 {
-        font-size: 2.5rem;
-    }
-    
-    .header-icon {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .header-icon i {
-        font-size: 1.8rem;
-    }
-    
-    .students-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .dashboard-controls {
-        padding: 1.5rem;
-    }
-    
-    .stats-overview {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .card-header {
-        flex-direction: column;
-        text-align: center;
-        padding: 1.5rem;
-    }
-    
-    .avatar-container {
-        margin-bottom: 1rem;
-    }
-    
-    .card-footer {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .footer-links {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 20px;
-    }
-    
-    .stats-overview {
-        grid-template-columns: 1fr;
-    }
-    
-    .metrics-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .filter-group {
-        min-width: 100%;
-    }
-}
-
-/* Кастомный скроллбар */
+/* Кастомный скроллбар для всего сайта */
 ::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
 }
 
 ::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -842,4 +750,197 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--secondary-color);
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 100%;
+        padding: 0 15px;
+    }
+    
+    .students-container {
+        gap: 1rem;
+    }
+    
+    .student-card {
+        min-width: 260px;
+        max-width: 260px;
+        height: 340px;
+    }
+}
+
+@media (max-width: 768px) {
+    .site-header {
+        padding: 1rem 0;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .header-left {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .header-icon {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .site-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .site-header .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .rank-legend {
+        justify-content: center;
+        gap: 0.8rem;
+    }
+    
+    .dashboard-controls {
+        padding: 1.2rem;
+    }
+    
+    .stats-overview {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .filter-group {
+        min-width: 100%;
+    }
+    
+    .scroll-btn {
+        display: none; /* На мобильных скрываем кнопки скролла */
+    }
+    
+    .student-card {
+        min-width: 240px;
+        max-width: 240px;
+        height: 330px;
+    }
+    
+    .card-header {
+        padding: 1rem;
+    }
+    
+    .project-info {
+        padding: 0 1rem 0.8rem;
+    }
+    
+    .card-footer {
+        padding: 0.6rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 12px;
+    }
+    
+    .stats-overview {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .stat-card {
+        padding: 1rem;
+    }
+    
+    .stat-card span {
+        font-size: 1.8rem;
+    }
+    
+    .student-card {
+        min-width: 220px;
+        max-width: 220px;
+        height: 320px;
+    }
+    
+    .avatar-container {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .student-info h2 {
+        font-size: 1rem;
+    }
+    
+    .metrics-grid {
+        gap: 0.5rem;
+    }
+    
+    .metric {
+        padding: 0.6rem;
+    }
+    
+    .metric-value {
+        font-size: 1rem;
+    }
+}
+
+/* Декоративные элементы для фона */
+.floating-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.floating-element {
+    position: absolute;
+    background: var(--gradient-primary);
+    opacity: 0.1;
+    border-radius: 50%;
+    animation: floatAround 20s infinite linear;
+}
+
+@keyframes floatAround {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(100px, 100px) rotate(90deg);
+    }
+    50% {
+        transform: translate(50px, 200px) rotate(180deg);
+    }
+    75% {
+        transform: translate(-50px, 100px) rotate(270deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(360deg);
+    }
+}
+
+/* Индикатор скролла */
+.scroll-hint {
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--primary-color);
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    opacity: 0;
+    animation: fadeInOut 3s infinite;
+    pointer-events: none;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; transform: translateY(-50%) translateX(10px); }
+    50% { opacity: 1; transform: translateY(-50%) translateX(0); }
 }

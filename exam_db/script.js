@@ -35,6 +35,7 @@ async function initDashboard() {
         renderStudents(studentsDataCache);
         updateDashboardStats(studentsDataCache);
         updateLanguageFilter();
+        initScrollButtons();
 
         // 4. Обновляем время и ссылку
         lastUpdateEl.textContent = new Date().toLocaleString('ru-RU');
@@ -113,10 +114,26 @@ function renderStudents(studentsData) {
         return;
     }
 
-    studentsContainer.innerHTML = studentsData.map(student => `
+    // Сначала определяем ранги для всех студентов
+    const studentsWithRanks = studentsData.map(student => {
+        const rank = calculateStudentRank(student, studentsData);
+        return { ...student, rank };
+    });
+
+    studentsContainer.innerHTML = studentsWithRanks.map(student => {
+        const rankBadge = getRankBadge(student.rank);
+        
+        return `
         <div class="student-card" data-languages="${Object.keys(student.languages).join(',')}">
+            <!-- Бейдж ранга в правом верхнем углу -->
+            <div class="rank-badge" style="background: ${rankBadge.color}">
+                ${rankBadge.icon} ${rankBadge.name}
+            </div>
+            
             <div class="card-header">
-                <img src="${student.user.avatar_url}" alt="${student.user.login}" class="avatar">
+                <div class="avatar-container">
+                    <img src="${student.user.avatar_url}" alt="${student.user.login}" class="avatar">
+                </div>
                 <div class="student-info">
                     <h2>${student.config.name}</h2>
                     <a href="${student.user.html_url}" target="_blank" class="github-link">
@@ -129,102 +146,53 @@ function renderStudents(studentsData) {
             </div>
 
             <div class="project-info">
-                <h3><i class="fas fa-project-diagram"></i> Проект</h3>
-                <a href="${student.repo.html_url}" target="_blank" class="repo-link">
-                    ${student.repo.name}
-                </a>
-                <p class="repo-description">${student.repo.description || 'Описание отсутствует'}</p>
-
-                // Замените блок .metrics-grid в renderStudents на этот:
-<div class="metrics-grid">
-    <div class="metric">
-        <div class="metric-header">
-            <i class="fas fa-code-commit"></i>
-            <div class="metric-value">${student.commitCount}</div>
-        </div>
-        <div class="metric-label">Коммитов</div>
-        <div class="metric-bar">
-            <div class="metric-fill" style="width: ${Math.min(student.commitCount, 100)}%"></div>
-        </div>
-    </div>
-    <div class="metric">
-        <div class="metric-header">
-            <i class="fas fa-exclamation-circle"></i>
-            <div class="metric-value">${student.issuesCount}</div>
-        </div>
-        <div class="metric-label">Issues</div>
-        <div class="metric-bar">
-            <div class="metric-fill" style="width: ${Math.min(student.issuesCount * 10, 100)}%"></div>
-        </div>
-    </div>
-    <div class="metric">
-        <div class="metric-header">
-            <i class="fas fa-book"></i>
-            <div class="metric-value">${student.hasReadme ? '✅' : '❌'}</div>
-        </div>
-        <div class="metric-label">README.md</div>
-        <div class="metric-bar">
-            <div class="metric-fill" style="width: ${student.hasReadme ? 100 : 0}%"></div>
-        </div>
-    </div>
-    <div class="metric">
-        <div class="metric-header">
-            <i class="fas fa-star"></i>
-            <div class="metric-value">${student.repo.stargazers_count}</div>
-        </div>
-        <div class="metric-label">Звезд</div>
-        <div class="metric-bar">
-            <div class="metric-fill" style="width: ${Math.min(student.repo.stargazers_count * 20, 100)}%"></div>
-        </div>
-    </div>
-</div>
-
-// И добавьте после блока .metrics-grid:
-<div class="language-chart">
-    ${Object.entries(student.languages)
-        .slice(0, 6) // Показываем топ-6 языков
-        .map(([lang, bytes]) => `
-            <div class="language-bar" 
-                 style="height: ${Math.min(bytes / 1000, 100)}%"
-                 data-lang="${lang}"
-                 title="${lang}: ${bytes} байт">
-            </div>
-        `).join('')}
-</div>
-            </div>
-
-            <div class="languages-section">
-                <h4><i class="fas fa-code"></i> Используемые языки</h4>
-                <div class="language-badges">
-                    ${Object.entries(student.languages)
-                        .map(([lang, bytes]) => `
-                            <span class="language-badge" style="--size: ${getLanguageSize(bytes)}">
-                                ${lang}
-                            </span>
-                        `).join('')}
+                <h3><i class="fas fa-project-diagram"></i> ${student.repo.name}</h3>
+                <p class="repo-description">${student.repo.description || 'Без описания'}</p>
+                
+                <div class="metrics-grid">
+                    <div class="metric">
+                        <i class="fas fa-code-commit"></i>
+                        <div class="metric-content">
+                            <strong>${student.commitCount}</strong>
+                            <span>Коммиты</span>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <div class="metric-content">
+                            <strong>${student.issuesCount}</strong>
+                            <span>Issues</span>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <i class="fas fa-book"></i>
+                        <div class="metric-content">
+                            <strong>${student.hasReadme ? '✅' : '❌'}</strong>
+                            <span>README</span>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <i class="fas fa-code"></i>
+                        <div class="metric-content">
+                            <strong>${Object.keys(student.languages).length}</strong>
+                            <span>Языки</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="card-footer">
-                <div class="footer-links">
-                    <a href="${student.repo.html_url}/issues" target="_blank">
-                        <i class="fas fa-tasks"></i> Issues
-                    </a>
-                    <a href="${student.repo.html_url}/pulls" target="_blank">
-                        <i class="fas fa-code-pull-request"></i> Pull Requests
-                    </a>
-                    ${student.repo.homepage ? `
-                    <a href="${student.repo.homepage}" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Демо
-                    </a>` : ''}
-                </div>
-                <span class="updated-at">
+                <div class="updated-at">
                     <i class="far fa-clock"></i>
-                    Обновлено: ${new Date(student.repo.updated_at).toLocaleDateString('ru-RU')}
-                </span>
+                    ${new Date(student.repo.updated_at).toLocaleDateString('ru-RU')}
+                </div>
+                <a href="${student.repo.html_url}" target="_blank" class="repo-link">
+                    <i class="fas fa-external-link-alt"></i> Репозиторий
+                </a>
             </div>
         </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
 // Вспомогательные функции
@@ -276,6 +244,73 @@ function filterStudents() {
 
     renderStudents(filtered);
 }
+
+//для определения ранга студента
+function calculateStudentRank(student, allStudents) {
+    // Баллы: коммиты (40%), issues (20%), звезды (20%), наличие README (10%), языки (10%)
+    const score = student.commitCount * 0.4 + 
+                  student.issuesCount * 0.2 + 
+                  student.repo.stargazers_count * 0.2 + 
+                  (student.hasReadme ? 10 : 0) + 
+                  (Object.keys(student.languages).length * 2);
+    
+    // Сортируем всех студентов по баллам
+    const sortedStudents = [...allStudents].sort((a, b) => {
+        const scoreA = a.commitCount * 0.4 + a.issuesCount * 0.2 + a.repo.stargazers_count * 0.2 + (a.hasReadme ? 10 : 0) + (Object.keys(a.languages).length * 2);
+        const scoreB = b.commitCount * 0.4 + b.issuesCount * 0.2 + b.repo.stargazers_count * 0.2 + (b.hasReadme ? 10 : 0) + (Object.keys(b.languages).length * 2);
+        return scoreB - scoreA;
+    });
+    
+    // Определяем позицию студента
+    const position = sortedStudents.findIndex(s => s.config.githubUsername === student.config.githubUsername);
+    
+    // Распределяем ранги
+    if (position === 0) return 'teamlead';
+    if (position === 1) return 'senior';
+    if (position >= 2 && position <= 3) return 'mid';
+    if (position >= 4 && position <= 8) return 'junior';
+    return 'trainee';
+}
+
+function getRankBadge(rank) {
+    const badges = {
+        'teamlead': { name: 'Тимлид', color: '#FF6B6B', icon: '👑' },
+        'senior': { name: 'Сеньер', color: '#4ECDC4', icon: '⭐' },
+        'mid': { name: 'Мидл', color: '#45B7D1', icon: '⚡' },
+        'junior': { name: 'Джун', color: '#96CEB4', icon: '🚀' },
+        'trainee': { name: 'Стажер', color: '#FFEAA7', icon: '🌱' }
+    };
+    return badges[rank] || badges['trainee'];
+}
+
+// Добавьте в конец script.js
+
+// Функции для скролла
+function initScrollButtons() {
+    const container = document.querySelector('.students-container');
+    const leftBtn = document.querySelector('.scroll-left');
+    const rightBtn = document.querySelector('.scroll-right');
+    
+    if (!container || !leftBtn || !rightBtn) return;
+    
+    leftBtn.addEventListener('click', () => {
+        container.scrollBy({ left: -300, behavior: 'smooth' });
+    });
+    
+    rightBtn.addEventListener('click', () => {
+        container.scrollBy({ left: 300, behavior: 'smooth' });
+    });
+    
+    // Обновляем видимость кнопок при скролле
+    container.addEventListener('scroll', () => {
+        const scrollLeft = container.scrollLeft;
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        
+        leftBtn.style.opacity = scrollLeft > 0 ? '1' : '0.5';
+        rightBtn.style.opacity = scrollLeft < maxScroll - 10 ? '1' : '0.5';
+    });
+}
+
 
 // Слушатели событий
 searchInput.addEventListener('input', filterStudents);
