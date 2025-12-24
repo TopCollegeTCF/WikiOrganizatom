@@ -1,1 +1,443 @@
+:root {
+    --primary-color: #2d3436;
+    --secondary-color: #636e72;
+    --accent-color: #6c5ce7;
+    --success-color: #00b894;
+    --warning-color: #fdcb6e;
+    --danger-color: #e17055;
+    --bg-color: #f9f9f9;
+    --card-bg: #ffffff;
+    --border-color: #dfe6e9;
+    --text-color: #2d3436;
+    --text-light: #636e72;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --radius: 16px;
+    --transition: all 0.3s ease;
+}
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding-bottom: 60px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Шапка */
+.site-header {
+    background: linear-gradient(135deg, var(--primary-color), #1a1e2e);
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    border-bottom: 4px solid var(--accent-color);
+}
+
+.site-header h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.site-header .subtitle {
+    font-size: 1.2rem;
+    opacity: 0.85;
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Панель управления */
+.dashboard-controls {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 1.8rem;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow);
+}
+
+.stats-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 1.8rem;
+}
+
+.stat-card {
+    background: linear-gradient(to right, #f8f9fa, #ffffff);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    border-left: 4px solid var(--accent-color);
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(108, 92, 231, 0.1);
+}
+
+.stat-card i {
+    font-size: 2.2rem;
+    color: var(--accent-color);
+    margin-bottom: 0.8rem;
+    display: block;
+}
+
+.stat-card span {
+    font-size: 2.2rem;
+    font-weight: 700;
+    display: block;
+    color: var(--primary-color);
+}
+
+.stat-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-top: 0.4rem;
+}
+
+.filters {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+#searchInput, #languageFilter {
+    flex: 1;
+    min-width: 250px;
+    padding: 0.9rem 1.2rem;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+#searchInput:focus, #languageFilter:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+}
+
+/* Контейнер для карточек */
+.students-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 2rem;
+}
+
+.loading, .error-message, .no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.loading i {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+}
+
+.error-message i {
+    font-size: 3rem;
+    color: var(--danger-color);
+    margin-bottom: 1.5rem;
+}
+
+.error-message button {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: var(--transition);
+}
+
+.error-message button:hover {
+    background: #5a4bd1;
+}
+
+/* Карточка студента */
+.student-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.student-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+    display: flex;
+    padding: 1.8rem;
+    border-bottom: 1px solid var(--border-color);
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid #f1f3f9;
+    object-fit: cover;
+}
+
+.student-info {
+    flex: 1;
+}
+
+.student-info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+}
+
+.github-link {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 0.8rem;
+}
+
+.github-link:hover {
+    color: var(--accent-color);
+}
+
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-high { background: rgba(0, 184, 148, 0.15); color: var(--success-color); }
+.status-medium { background: rgba(253, 203, 110, 0.15); color: #e17055; }
+.status-low { background: rgba(225, 112, 85, 0.15); color: var(--danger-color); }
+
+/* Секции карточки */
+.project-info, .languages-section {
+    padding: 1.5rem 1.8rem;
+}
+
+.project-info h3, .languages-section h4 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.repo-link {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.8rem;
+}
+
+.repo-link:hover {
+    text-decoration: underline;
+}
+
+.repo-description {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+/* Метрики */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1.2rem;
+}
+
+.metric {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.metric:hover {
+    background: #edf2f7;
+}
+
+.metric i {
+    font-size: 1.3rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.metric strong {
+    font-size: 1.5rem;
+    display: block;
+    color: var(--primary-color);
+}
+
+.metric span {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    display: block;
+    margin-top: 0.2rem;
+}
+
+/* Языки */
+.language-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 0.8rem;
+}
+
+.language-badge {
+    background: linear-gradient(to right, #6c5ce7, #a29bfe);
+    color: white;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.language-badge[style*="--size: md"] {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.language-badge[style*="--size: lg"] {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    background: linear-gradient(to right, #00b894, #55efc4);
+}
+
+/* Футер карточки */
+.card-footer {
+    margin-top: auto;
+    padding: 1.2rem 1.8rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    background: #fafafa;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.2rem;
+}
+
+.footer-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+}
+
+.updated-at {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Футер сайта */
+.site-footer {
+    margin-top: 4rem;
+    padding: 2rem 0;
+    text-align: center;
+    color: var(--text-light);
+    border-top: 1px solid var(--border-color);
+}
+
+.site-footer .github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 0.8rem;
+    color: var(--accent-color);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .site-header h1 {
+        font-size: 2.2rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .students-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .filters {
+        flex-direction: column;
+    }
+    
+    #searchInput, #languageFilter {
+        min-width: 100%;
+    }
+    
+    .card-footer {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        justify-content: center;
+    }
+}
