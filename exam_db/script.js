@@ -126,7 +126,7 @@ function renderStudents(studentsData) {
         return `
         <div class="student-card" data-languages="${Object.keys(student.languages).join(',')}">
             <!-- Бейдж ранга в правом верхнем углу -->
-            <div class="rank-badge" style="background: ${rankBadge.color}">
+            <div class="rank-badge ${student.rank}">
                 ${rankBadge.icon} ${rankBadge.name}
             </div>
             
