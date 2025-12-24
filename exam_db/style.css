@@ -1,4 +1,4 @@
-/* style.css - Оригинальный стиль с улучшенной адаптивностью */
+/* style.css - Стильный темный дизайн с 3D эффектами */
 
 :root {
     --primary-gradient: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
@@ -455,11 +455,11 @@ body::before {
     color: var(--text-primary);
 }
 
-/* Контейнер студентов - ИСПРАВЛЕННАЯ ЧАСТЬ */
+/* Контейнер студентов */
 .students-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    gap: 2rem;
     margin-bottom: 4rem;
     animation: fadeIn 0.8s ease-out;
 }
@@ -469,18 +469,17 @@ body::before {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* КАРТОЧКА СТУДЕНТА - ИСПРАВЛЕННАЯ ВЕРСИЯ */
+/* КАРТОЧКА СТУДЕНТА - Стильный 3D дизайн */
 .student-card {
     background: var(--glass-bg);
     backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-2xl);
-    padding: 1.5rem;
+    padding: 2rem;
     transition: var(--transition-bounce);
     position: relative;
-    overflow: visible; /* Изменено с hidden */
-    min-height: 400px; /* Уменьшено с 520px */
-    max-height: 450px; /* Добавлено ограничение */
+    overflow: hidden;
+    min-height: 520px;
     display: flex;
     flex-direction: column;
     box-shadow: var(--glass-shadow);
@@ -517,35 +516,33 @@ body::before {
 }
 
 .student-card:hover {
-    transform: translateY(-8px) scale(1.02); /* Уменьшено с -12px */
+    transform: translateY(-12px) scale(1.02);
     border-color: rgba(139, 92, 246, 0.3);
     box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.3),
-        0 0 50px rgba(139, 92, 246, 0.1),
+        0 25px 50px rgba(0, 0, 0, 0.4),
+        0 0 100px rgba(139, 92, 246, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* Бейдж ранга - исправленный */
+/* Бейдж ранга - 3D стиль */
 .rank-badge {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    padding: 0.5rem 1rem;
+    top: 1.5rem;
+    right: 1.5rem;
+    padding: 0.7rem 1.4rem;
     border-radius: 50px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: #000;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.7rem;
     z-index: 2;
     box-shadow: 
-        0 4px 12px rgba(0, 0, 0, 0.2),
-        0 2px 4px -1px rgba(0, 0, 0, 0.1);
-    max-width: 120px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+        0 8px 20px rgba(0, 0, 0, 0.3),
+        0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    transform: translateZ(20px);
+    transition: var(--transition-smooth);
 }
 
 .rank-badge::before {
@@ -554,16 +551,16 @@ body::before {
     inset: 1px;
     background: inherit;
     border-radius: inherit;
-    filter: blur(1px);
+    filter: blur(2px);
     opacity: 0.5;
     z-index: -1;
 }
 
 .rank-badge:hover {
-    transform: translateY(-2px) scale(1.03);
+    transform: translateY(-4px) scale(1.05);
     box-shadow: 
-        0 8px 20px rgba(0, 0, 0, 0.3),
-        0 4px 8px -2px rgba(0, 0, 0, 0.2);
+        0 15px 30px rgba(0, 0, 0, 0.4),
+        0 8px 12px -2px rgba(0, 0, 0, 0.3);
 }
 
 .rank-badge.teamlead {
@@ -588,20 +585,17 @@ body::before {
 }
 
 .rank-badge i {
-    font-size: 0.9rem;
-    flex-shrink: 0;
+    font-size: 1.1rem;
 }
 
-/* Шапка карточки - ИСПРАВЛЕНА */
+/* Шапка карточки */
 .card-header {
     display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    padding-right: 130px; /* Место для бейджа */
-    min-height: 70px;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-right: 140px;
     position: relative;
-    overflow: visible; /* Изменено */
 }
 
 .avatar-container {
@@ -610,20 +604,20 @@ body::before {
 }
 
 .avatar-wrapper {
-    width: 70px; /* Уменьшено с 90px */
-    height: 70px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
-    padding: 3px;
+    padding: 4px;
     background: var(--primary-gradient);
     position: relative;
     box-shadow: 
-        0 6px 15px rgba(139, 92, 246, 0.2),
+        0 10px 25px rgba(139, 92, 246, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
     transition: var(--transition-smooth);
 }
 
 .student-card:hover .avatar-wrapper {
-    transform: rotate(5deg) scale(1.03); /* Уменьшено с 10deg и 1.05 */
+    transform: rotate(10deg) scale(1.05);
 }
 
 .avatar {
@@ -631,18 +625,18 @@ body::before {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid var(--dark-800); /* Уменьшено с 3px */
+    border: 3px solid var(--dark-800);
 }
 
 .status-dot {
     position: absolute;
-    bottom: 6px; /* Изменено с 8px */
-    right: 6px;
-    width: 16px; /* Уменьшено с 20px */
-    height: 16px;
+    bottom: 8px;
+    right: 8px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    border: 2px solid var(--dark-800); /* Уменьшено с 3px */
-    box-shadow: 0 0 6px currentColor; /* Уменьшено с 10px */
+    border: 3px solid var(--dark-800);
+    box-shadow: 0 0 10px currentColor;
 }
 
 .status-high .status-dot { 
@@ -661,69 +655,55 @@ body::before {
 .student-info {
     flex: 1;
     min-width: 0;
-    overflow: hidden;
 }
 
 .student-name {
-    font-size: 1.3rem; /* Уменьшено с 1.6rem */
+    font-size: 1.6rem;
     font-weight: 700;
-    margin-bottom: 0.3rem; /* Уменьшено с 0.5rem */
+    margin-bottom: 0.5rem;
     background: linear-gradient(135deg, #F9FAFB, #D1D5DB);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    letter-spacing: -0.3px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
+    letter-spacing: -0.5px;
 }
 
 .github-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.7rem;
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: 0.9rem; /* Уменьшено с 1rem */
-    margin-bottom: 0.5rem; /* Уменьшено с 1rem */
-    padding: 0.4rem 0.8rem; /* Уменьшено */
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.6rem 1.2rem;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: var(--transition-smooth);
-    max-width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .github-link:hover {
     background: rgba(139, 92, 246, 0.1);
     color: #8B5CF6;
-    transform: translateX(3px); /* Уменьшено с 5px */
+    transform: translateX(5px);
     border-color: rgba(139, 92, 246, 0.3);
 }
 
 .github-link i {
-    font-size: 1rem; /* Уменьшено с 1.2rem */
-    flex-shrink: 0;
+    font-size: 1.2rem;
 }
 
 .status-indicator {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem; /* Уменьшено */
+    gap: 0.7rem;
+    padding: 0.7rem 1.4rem;
     border-radius: 50px;
-    font-size: 0.8rem; /* Уменьшено с 0.9rem */
+    font-size: 0.9rem;
     font-weight: 600;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 180px;
 }
 
 .status-high { 
@@ -739,146 +719,122 @@ body::before {
     color: #EF4444;
 }
 
-/* Информация о проекте - ИСПРАВЛЕНА */
+/* Информация о проекте */
 .project-info {
     background: rgba(255, 255, 255, 0.04);
-    border-radius: var(--radius-lg); /* Уменьшено с xl */
-    padding: 1rem; /* Уменьшено с 1.8rem */
-    margin-bottom: 1rem; /* Уменьшено с 1.5rem */
+    border-radius: var(--radius-xl);
+    padding: 1.8rem;
+    margin-bottom: 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    flex: 1;
-    min-height: 0;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
 }
 
 .project-header {
     display: flex;
     align-items: center;
-    gap: 0.8rem; /* Уменьшено с 1rem */
-    margin-bottom: 0.8rem; /* Уменьшено с 1.2rem */
-    min-height: 30px;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
 }
 
 .project-icon {
-    width: 40px; /* Уменьшено с 50px */
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background: var(--primary-gradient);
-    border-radius: 10px; /* Уменьшено с 14px */
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem; /* Уменьшено с 1.4rem */
+    font-size: 1.4rem;
     color: white;
-    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2); /* Уменьшено */
-    flex-shrink: 0;
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
 }
 
 .project-title {
-    font-size: 1rem; /* Уменьшено с 1.3rem */
+    font-size: 1.3rem;
     font-weight: 700;
     color: var(--text-primary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .repo-link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1rem; /* Уменьшено с 1.2rem */
+    display: block;
+    font-size: 1.2rem;
     font-weight: 600;
     color: #8B5CF6;
     text-decoration: none;
-    margin-bottom: 0.5rem; /* Уменьшено с 1rem */
+    margin-bottom: 1rem;
     transition: var(--transition-smooth);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .repo-link:hover {
     color: #7C3AED;
-    transform: translateX(3px); /* Уменьшено с 5px */
+    transform: translateX(5px);
 }
 
 .repo-description {
     color: var(--text-secondary);
-    font-size: 0.9rem; /* Уменьшено с 1rem */
-    line-height: 1.5;
-    margin-bottom: 1rem; /* Уменьшено с 1.8rem */
-    padding: 0.8rem; /* Уменьшено с 1rem */
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.8rem;
+    padding: 1rem;
     background: rgba(255, 255, 255, 0.03);
     border-radius: var(--radius-md);
-    border-left: 2px solid #8B5CF6; /* Уменьшено с 3px */
-    flex: 1;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* Ограничиваем 2 строками */
-    -webkit-box-orient: vertical;
-    max-height: 3em;
+    border-left: 3px solid #8B5CF6;
 }
 
-/* Метрики - исправленные */
+/* Метрики - стильные карточки */
 .metrics-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem; /* Уменьшено с 1.2rem */
-    margin-bottom: 1rem; /* Добавлено */
+    gap: 1.2rem;
 }
 
 .metric-card {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: var(--radius-md); /* Уменьшено с lg */
-    padding: 0.8rem; /* Уменьшено с 1.4rem */
+    border-radius: var(--radius-lg);
+    padding: 1.4rem;
     transition: var(--transition-smooth);
     position: relative;
     overflow: hidden;
-    min-height: 70px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .metric-card:hover {
-    transform: translateY(-3px); /* Уменьшено с -5px */
+    transform: translateY(-5px);
     background: rgba(255, 255, 255, 0.08);
     border-color: rgba(139, 92, 246, 0.3);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Уменьшено */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
 }
 
 .metric-header {
     display: flex;
     align-items: center;
-    gap: 0.6rem; /* Уменьшено с 1rem */
-    margin-bottom: 0.5rem; /* Уменьшено с 1rem */
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 .metric-icon {
-    width: 36px; /* Уменьшено с 48px */
-    height: 36px;
+    width: 48px;
+    height: 48px;
     background: rgba(139, 92, 246, 0.1);
-    border-radius: 8px; /* Уменьшено с 14px */
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem; /* Уменьшено с 1.4rem */
+    font-size: 1.4rem;
     color: #8B5CF6;
     transition: var(--transition-smooth);
-    flex-shrink: 0;
 }
 
 .metric-card:hover .metric-icon {
     background: var(--primary-gradient);
     color: white;
-    transform: rotate(10deg) scale(1.05); /* Уменьшено */
+    transform: rotate(15deg) scale(1.1);
 }
 
 .metric-value {
-    font-size: 1.4rem; /* Уменьшено с 2rem */
+    font-size: 2rem;
     font-weight: 800;
     line-height: 1;
     background: var(--primary-gradient);
@@ -887,69 +843,46 @@ body::before {
 }
 
 .metric-label {
-    font-size: 0.8rem; /* Уменьшено с 0.9rem */
+    font-size: 0.9rem;
     color: var(--text-secondary);
-    margin-top: 0.2rem; /* Уменьшено с 0.3rem */
+    margin-top: 0.3rem;
     font-weight: 500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 /* Языки программирования */
 .languages-section {
-    margin-top: 0.5rem;
-    min-height: 60px;
+    margin-top: 1rem;
 }
 
 .section-title {
     display: flex;
     align-items: center;
-    gap: 0.5rem; /* Уменьшено с 0.8rem */
-    font-size: 0.9rem; /* Уменьшено с 1.1rem */
+    gap: 0.8rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: 0.6rem; /* Уменьшено с 1.2rem */
-    white-space: nowrap;
+    margin-bottom: 1.2rem;
 }
 
 .section-title i {
     color: #8B5CF6;
-    font-size: 1rem; /* Уменьшено с 1.2rem */
+    font-size: 1.2rem;
 }
 
 .language-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem; /* Уменьшено с 0.8rem */
-    max-height: 60px;
-    overflow-y: auto;
-    padding-right: 5px;
-}
-
-.language-tags::-webkit-scrollbar {
-    width: 4px;
-}
-
-.language-tags::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 2px;
-}
-
-.language-tags::-webkit-scrollbar-thumb {
-    background: rgba(139, 92, 246, 0.3);
-    border-radius: 2px;
+    gap: 0.8rem;
 }
 
 .language-tag {
-    padding: 0.3rem 0.7rem; /* Уменьшено */
+    padding: 0.6rem 1.2rem;
     background: rgba(139, 92, 246, 0.1);
     color: #8B5CF6;
-    border-radius: 15px;
-    font-size: 0.8rem; /* Уменьшено с 0.9rem */
+    border-radius: 50px;
+    font-size: 0.9rem;
     font-weight: 600;
     border: 1px solid rgba(139, 92, 246, 0.2);
-    white-space: nowrap;
     transition: var(--transition-smooth);
     position: relative;
     overflow: hidden;
@@ -963,7 +896,7 @@ body::before {
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.2), transparent);
-    transition: left 0.5s; /* Уменьшено с 0.6s */
+    transition: left 0.6s;
 }
 
 .language-tag:hover::before {
@@ -972,61 +905,54 @@ body::before {
 
 .language-tag:hover {
     background: rgba(139, 92, 246, 0.2);
-    transform: translateY(-1px); /* Уменьшено с -2px */
-    box-shadow: 0 3px 8px rgba(139, 92, 246, 0.2); /* Уменьшено */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(139, 92, 246, 0.2);
 }
 
-/* Футер карточки - исправленный */
+/* Футер карточки */
 .card-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 1rem; /* Уменьшено с 1.8rem */
+    padding-top: 1.8rem;
     margin-top: auto;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    min-height: 50px;
 }
 
 .update-info {
     display: flex;
     align-items: center;
-    gap: 0.5rem; /* Уменьшено с 0.8rem */
+    gap: 0.8rem;
     color: var(--text-secondary);
-    font-size: 0.8rem; /* Уменьшено с 0.9rem */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 50%;
+    font-size: 0.9rem;
 }
 
 .update-info i {
     color: #8B5CF6;
-    font-size: 0.8rem; /* Уменьшено */
 }
 
 .repo-button {
     display: flex;
     align-items: center;
-    gap: 0.6rem; /* Уменьшено с 0.8rem */
-    padding: 0.6rem 1.2rem; /* Уменьшено */
+    gap: 0.8rem;
+    padding: 0.8rem 1.6rem;
     background: var(--primary-gradient);
     color: white;
     text-decoration: none;
-    border-radius: var(--radius-md); /* Уменьшено с lg */
+    border-radius: var(--radius-lg);
     font-weight: 600;
-    font-size: 0.85rem; /* Уменьшено с 0.95rem */
+    font-size: 0.95rem;
     transition: var(--transition-smooth);
-    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3); /* Уменьшено */
-    white-space: nowrap;
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
 }
 
 .repo-button:hover {
-    transform: translateY(-2px); /* Уменьшено с -3px */
-    box-shadow: 0 6px 18px rgba(139, 92, 246, 0.4); /* Уменьшено */
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(139, 92, 246, 0.4);
 }
 
 .repo-button i {
-    font-size: 0.9rem; /* Уменьшено с 1.1rem */
+    font-size: 1.1rem;
 }
 
 /* Футер сайта */
@@ -1080,7 +1006,7 @@ body::before {
 .loading, .error-message, .no-results {
     grid-column: 1 / -1;
     text-align: center;
-    padding: 3rem 2rem; /* Уменьшено с 4rem */
+    padding: 4rem 2rem;
     background: var(--glass-bg);
     border-radius: var(--radius-2xl);
     backdrop-filter: blur(20px);
@@ -1092,13 +1018,13 @@ body::before {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem; /* Уменьшено с 1.5rem */
+    gap: 1.5rem;
 }
 
 .loading-spinner {
-    width: 60px; /* Уменьшено с 80px */
-    height: 60px;
-    border: 2px solid rgba(139, 92, 246, 0.1);
+    width: 80px;
+    height: 80px;
+    border: 3px solid rgba(139, 92, 246, 0.1);
     border-radius: 50%;
     border-top-color: #8B5CF6;
     animation: spin 1s linear infinite;
@@ -1108,58 +1034,52 @@ body::before {
 .loading-spinner::before {
     content: '';
     position: absolute;
-    inset: -2px;
-    border: 2px solid transparent;
+    inset: -3px;
+    border: 3px solid transparent;
     border-top-color: #7C3AED;
     border-radius: 50%;
     animation: spin 2s linear infinite;
 }
 
 .error-icon {
-    width: 60px; /* Уменьшено с 80px */
-    height: 60px;
+    width: 80px;
+    height: 80px;
     background: var(--danger-gradient);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem; /* Уменьшено с 2.5rem */
+    font-size: 2.5rem;
     color: white;
-    margin: 0 auto 1rem; /* Уменьшено с 1.5rem */
-    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3); /* Уменьшено */
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 10px 30px rgba(239, 68, 68, 0.3);
 }
 
 .retry-button {
     background: var(--primary-gradient);
     color: white;
     border: none;
-    padding: 0.8rem 1.8rem; /* Уменьшено */
+    padding: 1rem 2.5rem;
     border-radius: 50px;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition-smooth);
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem; /* Уменьшено с 0.8rem */
-    margin-top: 1rem;
-    font-size: 0.9rem;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
 }
 
 .retry-button:hover {
-    transform: translateY(-2px); /* Уменьшено с -3px */
-    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3); /* Уменьшено */
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(139, 92, 246, 0.3);
 }
 
-/* Адаптивность - УЛУЧШЕНА */
+/* Адаптивность */
 @media (max-width: 1200px) {
     .students-container {
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: 1.2rem;
-    }
-    
-    .student-card {
-        min-height: 380px;
-        max-height: 420px;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        gap: 1.5rem;
     }
 }
 
@@ -1169,7 +1089,7 @@ body::before {
     }
     
     .site-header h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
     
     .header-main {
@@ -1178,112 +1098,54 @@ body::before {
         gap: 1rem;
     }
     
-    .header-icon-wrapper {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .header-icon {
-        font-size: 1.5rem;
-    }
-    
     .students-container {
         grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .student-card {
-        min-height: 360px;
-        max-height: 400px;
-        padding: 1.2rem;
     }
     
     .card-header {
         flex-direction: column;
         text-align: center;
         padding-right: 0;
-        gap: 0.8rem;
+        gap: 1.2rem;
     }
     
     .avatar-wrapper {
-        width: 60px;
-        height: 60px;
+        width: 80px;
+        height: 80px;
     }
     
     .rank-badge {
         position: static;
-        margin: 0 auto 0.5rem;
+        margin: 0 auto 1.5rem;
         width: fit-content;
-    }
-    
-    .student-name {
-        font-size: 1.2rem;
-    }
-    
-    .metrics-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.6rem;
-    }
-    
-    .metric-card {
-        padding: 0.6rem;
-        min-height: 60px;
-    }
-    
-    .metric-value {
-        font-size: 1.2rem;
-    }
-    
-    .card-footer {
-        flex-direction: column;
-        gap: 0.8rem;
-        text-align: center;
-    }
-    
-    .update-info {
-        max-width: 100%;
-        justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 0.8rem;
-    }
-    
-    .site-header h1 {
-        font-size: 1.6rem;
-    }
-    
-    .site-header .subtitle {
-        font-size: 0.9rem;
-    }
-    
-    .rank-legend {
-        gap: 0.5rem;
-    }
-    
-    .rank-item {
-        padding: 0.3rem 0.6rem;
-        font-size: 0.7rem;
-    }
-    
-    .dashboard-controls {
-        padding: 1rem;
-    }
-    
-    .student-card {
-        padding: 1rem;
-        min-height: 340px;
-        max-height: 380px;
     }
     
     .metrics-grid {
         grid-template-columns: 1fr;
     }
     
-    .language-tags {
-        max-height: 40px;
+    .card-footer {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .rank-legend {
+        gap: 0.8rem;
+    }
+    
+    .student-card {
+        padding: 1.5rem;
+    }
+    
+    .student-name {
+        font-size: 1.4rem;
     }
 }
 
