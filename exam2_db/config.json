@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Александр Лешуков",
+    "githubUsername": "amiamiur",
+    "repoName": "habit-tracker"
+  },
+  {
+    "name": "Энвер Муртазаев",
+    "githubUsername": "3NVy82",
+    "repoName": "Web-App"
+  },
+  {
+    "name": "Али Агдаг",
+    "githubUsername": "remantop111-arch",
+    "repoName": "App-fastapi"
+  },
+  {
+    "name": "Роман Шевцов",
+    "githubUsername": "Q-A-D",
+    "repoName": "fastapi-blog-project"
+  },
+  {
+    "name": "Андрей Казаев",
+    "githubUsername": "VoidTt",
+    "repoName": "FastAPI_Project"
+  },
+   {
+    "name": "Лев Гунько",
+    "githubUsername": "M0nstr1kUwU",
+    "repoName": "ProjectForExamen"
+  },
+  {
+    "name": "Александра Коваль",
+    "githubUsername": "to0ken",
+    "repoName": "FastApi_module_project"
+  }
+ 
+]
