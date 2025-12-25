@@ -1,0 +1,1018 @@
+:root {
+    --primary-color: #6c5ce7;
+    --secondary-color: #a29bfe;
+    --dark-bg: #0f172a;
+    --darker-bg: #0a0f1c;
+    --card-bg: rgba(30, 41, 59, 0.8);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-green: #10b981;
+    --accent-yellow: #f59e0b;
+    --accent-red: #ef4444;
+    --accent-cyan: #06b6d4;
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --shadow-glow: 0 0 30px rgba(108, 92, 231, 0.15);
+    --shadow-card: 0 10px 25px rgba(0, 0, 0, 0.25);
+    --radius-xl: 20px;
+    --radius-lg: 16px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Сброс и базовые стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--dark-bg);
+    background-image: 
+        radial-gradient(circle at 0% 0%, rgba(108, 92, 231, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 100% 0%, rgba(244, 114, 182, 0.1) 0%, transparent 50%);
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Анимированный фон */
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    opacity: 0.3;
+}
+
+.grid-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
+}
+
+/* Шапка сайта */
+.site-header {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--card-border);
+    padding: 1.5rem 0;
+    margin-bottom: 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.header-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--gradient-primary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    animation: float 4s ease-in-out infinite;
+}
+
+.header-icon i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.site-header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #ffffff, var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
+.site-header .subtitle {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    opacity: 0.9;
+}
+
+/* Легенда рангов */
+.rank-legend {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.rank-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.rank-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.teamlead-color { background: linear-gradient(135deg, #FF6B6B, #FF8E8E); }
+.senior-color { background: linear-gradient(135deg, #4ECDC4, #6CE6DE); }
+.mid-color { background: linear-gradient(135deg, #45B7D1, #67D9F3); }
+.junior-color { background: linear-gradient(135deg, #96CEB4, #B8E8D0); }
+.trainee-color { background: linear-gradient(135deg, #FFEAA7, #FFF4D4); }
+
+/* Панель управления */
+.dashboard-controls {
+    background: rgba(30, 41, 59, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-card);
+}
+
+.stats-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    padding: 1.2rem;
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 20px rgba(108, 92, 231, 0.1);
+}
+
+.stat-card i {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    display: block;
+}
+
+.stat-card:nth-child(1) i { color: var(--accent-cyan); }
+.stat-card:nth-child(2) i { color: var(--accent-green); }
+.stat-card:nth-child(3) i { color: var(--accent-yellow); }
+.stat-card:nth-child(4) i { color: var(--primary-color); }
+
+.stat-card span {
+    font-size: 2rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.3rem;
+    background: linear-gradient(to right, #ffffff, var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stat-card p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Фильтры */
+.filters {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filter-group {
+    flex: 1;
+    min-width: 250px;
+}
+
+.filter-group label {
+    display: block;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.15);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+#searchInput::placeholder {
+    color: var(--text-secondary);
+}
+
+#languageFilter {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px;
+    padding-right: 3rem;
+}
+
+/* Контейнер студентов с горизонтальным скроллом */
+.students-wrapper {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.students-container {
+    display: flex;
+    gap: 1.2rem;
+    overflow-x: auto;
+    padding: 1rem 0;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) rgba(255, 255, 255, 0.05);
+}
+
+.students-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.students-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.students-container::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+.students-container::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* Кнопки навигации для скролла */
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 50%;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    z-index: 10;
+    backdrop-filter: blur(10px);
+}
+
+.scroll-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.scroll-left {
+    left: -20px;
+}
+
+.scroll-right {
+    right: -20px;
+}
+
+/* Состояния загрузки и ошибок */
+.loading, .error-message, .no-results {
+    width: 100%;
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(10px);
+}
+
+.loading i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    animation: spin 1.5s linear infinite;
+}
+
+.error-message i {
+    font-size: 2.5rem;
+    color: var(--accent-red);
+    margin-bottom: 1.5rem;
+}
+
+.error-message button {
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: var(--transition-smooth);
+}
+
+.error-message button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(108, 92, 231, 0.3);
+}
+
+/* Карточка студента - КОМПАКТНАЯ ВЕРСИЯ */
+/* Увеличенные размеры карточек студентов */
+.students-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.student-card {
+    min-width: 100%;
+    height: 480px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    transition: var(--transition-smooth);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    animation: cardAppear 0.5s ease-out forwards;
+    animation-delay: calc(var(--card-index, 0) * 0.1s);
+}
+
+/* Увеличенные отступы и размеры внутри карточки */
+.card-header {
+    padding: 1.5rem;
+    gap: 1.2rem;
+}
+
+.avatar-container {
+    width: 75px;
+    height: 75px;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border: 3px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                var(--gradient-primary) border-box;
+}
+
+.student-info h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.github-link {
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+}
+
+.status-indicator {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+}
+
+/* Проект с увеличенными отступами */
+.project-info {
+    padding: 0 1.5rem 1.2rem;
+}
+
+.project-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    gap: 0.8rem;
+}
+
+.project-info h3 i {
+    font-size: 1rem;
+}
+
+.repo-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    height: 3.6em; /* 3 строки текста */
+}
+
+/* Увеличенные метрики */
+.metrics-grid {
+    gap: 0.8rem;
+}
+
+.metric {
+    padding: 1rem;
+    gap: 0.8rem;
+}
+
+.metric i {
+    font-size: 1.3rem;
+}
+
+.metric-content {
+    gap: 0.3rem;
+}
+
+.metric-value {
+    font-size: 1.3rem;
+}
+
+.metric-label {
+    font-size: 0.85rem;
+}
+
+/* Футер карточки */
+.card-footer {
+    padding: 1rem 1.5rem;
+}
+
+.updated-at {
+    font-size: 0.85rem;
+}
+
+.repo-link {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+}
+
+/* Бейдж ранга увеличен */
+.rank-badge {
+    top: 15px;
+    right: 15px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    gap: 0.5rem;
+}
+
+/* Адаптивность для увеличенных карточек */
+@media (max-width: 1200px) {
+    .students-container {
+        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    }
+    .student-card {
+        height: 460px;
+    }
+}
+
+@media (max-width: 768px) {
+    .students-container {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    .student-card {
+        height: auto;
+        min-height: 440px;
+    }
+    .avatar-container {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .student-card {
+        min-height: 420px;
+    }
+    .card-header {
+        padding: 1.2rem;
+    }
+    .project-info {
+        padding: 0 1.2rem 1rem;
+    }
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.status-high .avatar-status { background: var(--accent-green); }
+.status-medium .avatar-status { background: var(--accent-yellow); }
+.status-low .avatar-status { background: var(--accent-red); }
+
+.student-info {
+    flex: 1;
+    min-width: 0; /* Для правильного обрезания текста */
+}
+
+.student-info h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: linear-gradient(to right, #ffffff, var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.github-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
+    transition: var(--transition-smooth);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.github-link:hover {
+    color: var(--primary-color);
+}
+
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+}
+
+.status-high { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.2); }
+.status-medium { background: rgba(245, 158, 11, 0.15); color: var(--accent-yellow); border: 1px solid rgba(245, 158, 11, 0.2); }
+.status-low { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.2); }
+
+/* Информация о проекте */
+.project-info {
+    padding: 0 1.2rem 1rem;
+    flex: 1;
+}
+
+.project-info h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+}
+
+.project-info h3 i {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+.repo-description {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    height: 2.8em; /* 2 строки текста */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* Метрики */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+}
+
+.metric {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-sm);
+    padding: 0.7rem;
+    transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.metric:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+}
+
+.metric i {
+    font-size: 1rem;
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.metric-content {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.metric-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.metric-label {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    margin-top: 0.2rem;
+    white-space: nowrap;
+}
+
+/* Футер карточки */
+.card-footer {
+    padding: 0.8rem 1.2rem;
+    border-top: 1px solid var(--card-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.02);
+    margin-top: auto;
+}
+
+.updated-at {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.repo-link {
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.8rem;
+    background: rgba(108, 92, 231, 0.1);
+    border-radius: var(--radius-sm);
+    transition: var(--transition-smooth);
+}
+
+.repo-link:hover {
+    background: rgba(108, 92, 231, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Футер сайта */
+.site-footer {
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    text-align: center;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--card-border);
+    position: relative;
+}
+
+.site-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--gradient-primary);
+    border-radius: 0 0 2px 2px;
+}
+
+.github-org {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+    padding: 0.6rem 1.2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 50px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: var(--transition-smooth);
+    font-size: 0.9rem;
+}
+
+.github-org:hover {
+    background: rgba(108, 92, 231, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Анимации */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardAppear {
+    from { 
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Кастомный скроллбар для всего сайта */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gradient-primary);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 100%;
+        padding: 0 15px;
+    }
+    
+    .students-container {
+        gap: 1rem;
+    }
+    
+    .student-card {
+        min-width: 260px;
+        max-width: 260px;
+        height: 340px;
+    }
+}
+
+@media (max-width: 768px) {
+    .site-header {
+        padding: 1rem 0;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .header-left {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .header-icon {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .site-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .site-header .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .rank-legend {
+        justify-content: center;
+        gap: 0.8rem;
+    }
+    
+    .dashboard-controls {
+        padding: 1.2rem;
+    }
+    
+    .stats-overview {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .filter-group {
+        min-width: 100%;
+    }
+    
+    .scroll-btn {
+        display: none; /* На мобильных скрываем кнопки скролла */
+    }
+    
+    .student-card {
+        min-width: 240px;
+        max-width: 240px;
+        height: 330px;
+    }
+    
+    .card-header {
+        padding: 1rem;
+    }
+    
+    .project-info {
+        padding: 0 1rem 0.8rem;
+    }
+    
+    .card-footer {
+        padding: 0.6rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 12px;
+    }
+    
+    .stats-overview {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .stat-card {
+        padding: 1rem;
+    }
+    
+    .stat-card span {
+        font-size: 1.8rem;
+    }
+    
+    .student-card {
+        min-width: 220px;
+        max-width: 220px;
+        height: 320px;
+    }
+    
+    .avatar-container {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .student-info h2 {
+        font-size: 1rem;
+    }
+    
+    .metrics-grid {
+        gap: 0.5rem;
+    }
+    
+    .metric {
+        padding: 0.6rem;
+    }
+    
+    .metric-value {
+        font-size: 1rem;
+    }
+}
+
+/* Декоративные элементы для фона */
+.floating-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.floating-element {
+    position: absolute;
+    background: var(--gradient-primary);
+    opacity: 0.1;
+    border-radius: 50%;
+    animation: floatAround 20s infinite linear;
+}
+
+@keyframes floatAround {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(100px, 100px) rotate(90deg);
+    }
+    50% {
+        transform: translate(50px, 200px) rotate(180deg);
+    }
+    75% {
+        transform: translate(-50px, 100px) rotate(270deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(360deg);
+    }
+}
+
+/* Индикатор скролла */
+.scroll-hint {
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--primary-color);
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    opacity: 0;
+    animation: fadeInOut 3s infinite;
+    pointer-events: none;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; transform: translateY(-50%) translateX(10px); }
+    50% { opacity: 1; transform: translateY(-50%) translateX(0); }
+}
