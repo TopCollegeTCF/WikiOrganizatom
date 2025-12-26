@@ -24,7 +24,7 @@
     "githubUsername": "VoidTt",
     "repoName": "FastAPI_Project"
   },
-   {
+  {
     "name": "Лев Гунько",
     "githubUsername": "M0nstr1kUwU",
     "repoName": "ProjectForExamen"
@@ -44,10 +44,10 @@
     "githubUsername": "exxiidae",
     "repoName": "zachetdb"
   },
-   {
+  {
     "name": "Ксения Маркевич",
     "githubUsername": "kseniyafeo2000-maker",
     "repoName": "game-reviews-platform"
-  },
+  }
  
 ]
