@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏆 Лидерборд команд | Top College Projects</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --darker: #0a0f1c;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --card-bg: rgba(15, 23, 42, 0.9);
+            --glow: 0 0 20px rgba(99, 102, 241, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Анимированный фон */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+        }
+
+        /* Сетка фона */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Хедер */
+        header {
+            text-align: center;
+            padding: 40px 0 30px;
+            position: relative;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto 25px;
+            line-height: 1.6;
+        }
+
+        /* Переключатель вида */
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .view-btn {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50px;
+            color: var(--light);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .view-btn.active {
+            background: var(--primary);
+            box-shadow: var(--glow);
+        }
+
+        .view-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Лидерборд */
+        .leaderboard-section {
+            margin-bottom: 60px;
+        }
+
+        .leaderboard {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        /* Карточка команды */
+        .team-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            border-color: var(--primary);
+        }
+
+        /* Место команды */
+        .team-rank {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 900;
+            z-index: 3;
+            box-shadow: 0 0 20px currentColor;
+        }
+
+        .rank-1 { background: linear-gradient(135deg, #FFD700, #FFA500); color: #000; }
+        .rank-2 { background: linear-gradient(135deg, #C0C0C0, #A0A0A0); color: #000; }
+        .rank-3 { background: linear-gradient(135deg, #CD7F32, #A0522D); color: #000; }
+        .rank-4 { background: linear-gradient(135deg, #4f46e5, #3730a3); color: white; }
+        .rank-5 { background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; }
+
+        /* Заголовок команды */
+        .team-header {
+            padding: 30px 30px 20px;
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.2), transparent);
+            position: relative;
+        }
+
+        .team-name {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .team-score {
+            font-size: 1.3rem;
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .team-tagline {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        /* Достижения команды */
+        .team-achievements {
+            padding: 0 30px;
+            margin: 20px 0;
+        }
+
+        .achievements-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .achievements-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .achievement-badge {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        /* Разработчики */
+        .developers-section {
+            padding: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .developers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* Карточка разработчика */
+        .dev-card {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 18px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .dev-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            background: rgba(30, 41, 59, 0.8);
+        }
+
+        .dev-card.top-dev {
+            background: rgba(99, 102, 241, 0.15);
+            border-color: var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dev-card.top-dev:before {
+            content: '★ ТОП';
+            position: absolute;
+            top: 10px;
+            right: -30px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 35px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .dev-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .dev-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        .dev-info {
+            flex: 1;
+        }
+
+        .dev-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .dev-github {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .dev-role {
+            color: var(--primary);
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: rgba(99, 102, 241, 0.1);
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .dev-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--glow);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Кнопка проекта */
+        .project-btn-container {
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .project-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
+        }
+
+        /* Футер */
+        footer {
+            text-align: center;
+            padding: 50px 0 30px;
+            margin-top: 80px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .back-link:hover {
+            color: var(--secondary);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1200px) {
+            .developers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .team-name {
+                font-size: 1.8rem;
+            }
+            
+            .developers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .team-header {
+                padding: 25px 20px 15px;
+            }
+            
+            .developers-section, .project-btn-container {
+                padding: 25px 20px;
+            }
+            
+            .developers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .view-toggle {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 3rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .team-rank {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .dev-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .dev-links {
+                flex-direction: column;
+            }
+        }
+
+        /* Анимации */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Специальные эффекты */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white;
+            z-index: 1;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(99, 102, 241, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Анимированный фон -->
+    <div class="bg-animation"></div>
+    <div class="bg-grid"></div>
+    
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">🏆</div>
+                <h1 class="animate__animated animate__fadeInDown">Лидерборд команд</h1>
+                <p class="subtitle animate__animated animate__fadeInUp animate__delay-1s">
+                    Соревнование лучших разработчиков Top College. Здесь представлены 5 команд, 
+                    их достижения и топ-разработчики. Узнайте, кто лидирует в гонке технологий!
+                    Разработка велась в ролевом режиме, цель была установлена спонтанно, время на создание 1 час!
+                </p>
+                
+                <div class="view-toggle animate__animated animate__fadeIn animate__delay-2s">
+                    <button class="view-btn active" id="viewList">
+                        <i class="fas fa-list"></i> Список команд
+                    </button>
+                    <button class="view-btn" id="viewGrid">
+                        <i class="fas fa-th-large"></i> Сетка команд
+                    </button>
+                    <button class="view-btn" id="viewStats">
+                        <i class="fas fa-chart-bar"></i> Статистика
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="leaderboard-section">
+                <div class="leaderboard" id="leaderboardContainer">
+                    <!-- Команда 1 -->
+                    <div class="team-card animate-on-scroll">
+                        <div class="team-rank rank-1">1</div>
+                        
+                        <div class="team-header">
+                            <div class="team-name">
+                                <span>.....⚡ РПО 24 / 2</span>
+                                <span class="team-score">★ 9,850 очков</span>
+                            </div>
+                            <p class="team-tagline"> "SmartHome" Слаженный командный подход - второй год обучения</p>
+                        </div>
+                        
+                        <div class="team-achievements">
+                            <h3 class="achievements-title"><i class="fas fa-trophy"></i> Достижения команды</h3>
+                            <div class="achievements-list">
+                                <div class="achievement-badge"><i class="fas fa-medal"></i> Рабочая готовая модель</div>
+                                <div class="achievement-badge"><i class="fas fa-bolt"></i> Высокая скорость разработки</div>
+                                <div class="achievement-badge"><i class="fas fa-code-branch"></i> 9+ успешных pull request & merges</div>
+                                <div class="achievement-badge"><i class="fas fa-users"></i> Успешная командная работа</div>
+                                <div class="achievement-badge"><i class="fas fa-github"></i> 20+ commits</div>
+                            </div>
+                        </div>
+                        
+                        <div class="developers-section">
+                            <h3 class="section-title"><i class="fas fa-users"></i> Топ-разработчики команды</h3>
+                            <div class="developers-grid">
+                                <!-- Разработчик 1 -->
+                                <div class="dev-card top-dev">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/235036181?s=400&v=4" alt="stupiqplonde" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">stupiqplonde</h4>
+                                            <p class="dev-github">@stupiqplonde</p>
+                                            <span class="dev-role">Teamlead</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/stupiqplonde" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="stupiqplonde.html" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                
+                                <!-- Разработчик 2 -->
+                                <div class="dev-card top-dev">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/235081951?s=400&v=4" alt="500EFKA500" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">500EFKA500</h4>
+                                            <p class="dev-github">@500EFKA500</p>
+                                            <span class="dev-role">Junior</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/500EFKA500" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="500efka500_resume.html" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                
+                                <!-- Разработчик 3 -->
+                                <div class="dev-card">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/245714422?s=400&v=4" alt="Hitsuga-K" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">Hitsuga-K</h4>
+                                            <p class="dev-github">@Hitsuga-K</p>
+                                            <span class="dev-role">Midlle</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/Hitsuga-K" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="hitsuga_k_resume.html" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+
+                                 <!-- Разработчик 4 -->
+                                 <div class="dev-card">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/235081090?s=400&v=4" alt="jpwein" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">jpwein</h4>
+                                            <p class="dev-github">@jpwein</p>
+                                            <span class="dev-role">Midlle</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/jpwein" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="jpwein_resume.html" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <!-- Разработчик 5 -->
+                                <div class="dev-card">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/236754375?s=400&v=4" alt="Alex-hue-dfk" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">Alex-hue-dfk</h4>
+                                            <p class="dev-github">@Alex-hue-dfk</p>
+                                            <span class="dev-role">Junior</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/Alex-hue-dfk" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="emil.html" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <!-- Разработчик 6 -->
+                                <div class="dev-card top-dev">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/200377298?s=400&v=4" alt="Goro" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">Goro</h4>
+                                            <p class="dev-github">@Goro</p>
+                                            <span class="dev-role">Senior</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/Goro" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="sivash.html" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <!-- Разработчик 7 -->
+                                <div class="dev-card">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/236742785?v=4" alt="DozFiree" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">DozFiree</h4>
+                                            <p class="dev-github">@DozFiree</p>
+                                            <span class="dev-role">Midlle</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/DozFiree" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="DozFiree_resume.html" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="project-btn-container">
+                            <a href="https://github.com/stupiqplonde/SmartHome" target="_blank" class="project-btn">
+                                <i class="fas fa-rocket"></i> Перейти к проекту SmartHome
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Команда 2 -->
+                    <div class="team-card animate-on-scroll">
+                        <div class="team-rank rank-2">2</div>
+                        
+                        <div class="team-header">
+                            <div class="team-name">
+                                <span>.....🚀 homee & Project </span>
+                                <span class="team-score">★ 9,450 очков</span>
+                            </div>
+                            <p class="team-tagline">Отличное сплочение - первый год обучения</p>
+                        </div>
+                        
+                        <div class="team-achievements">
+                            <h3 class="achievements-title"><i class="fas fa-trophy"></i> Достижения команды</h3>
+                            <div class="achievements-list">
+                                <div class="achievement-badge"><i class="fas fa-cloud"></i> Быстрая сборка</div>
+                                <div class="achievement-badge"><i class="fas fa-shield-alt"></i> Уверенная работа с шаблонами</div>
+                                <div class="achievement-badge"><i class="fas fa-bug"></i> 2 прототипа в одном проекте</div>
+                                <div class="achievement-badge"><i class="fas fa-bug"></i> Документация и планирование</div>
+                            </div>
+                        </div>
+                        
+                        <div class="developers-section">
+                            <h3 class="section-title"><i class="fas fa-users"></i> Топ-разработчики команды</h3>
+                            <div class="developers-grid">
+                                <!-- Разработчик 1 -->
+                                <div class="dev-card top-dev">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/231739717?v=4" alt="muesimka" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">Дарья</h4>
+                                            <p class="dev-github">@muesimka</p>
+                                            <span class="dev-role">Teamlead</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/muesimka" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="muesimka.html" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                
+                                <!-- Разработчик 2 -->
+                                <div class="dev-card">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/211399517?v=4" alt="500EFKA500" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">Тимурлан</h4>
+                                            <p class="dev-github">@kpe4</p>
+                                            <span class="dev-role">Senior</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/kpe4/kpe4" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="kpe4.html" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                
+                                <!-- Разработчик 3 -->
+                                <div class="dev-card">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/231523579?v=4" alt="btwyourethebest-wq" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">Виталий</h4>
+                                            <p class="dev-github">@btwyourethebest-wq</p>
+                                            <span class="dev-role">Teamlead</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/btwyourethebest-wq" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="btwyourethebest-wq.html" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+
+                                 <!-- Разработчик 4 -->
+                                 <div class="dev-card">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/236538819?v=4" alt="scalaragg" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">Иван</h4>
+                                            <p class="dev-github">@scalaragg</p>
+                                            <span class="dev-role">Midlle</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/scalaragg" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="https://github.com/scalaragg/scalaragg" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <!-- Разработчик 5 -->
+                                <div class="dev-card top-dev">
+                                    <div class="dev-header ">
+                                        <img src="https://avatars.githubusercontent.com/u/141362044?v=4" alt="Alex-hue-dfk" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">Никита</h4>
+                                            <p class="dev-github">@nktnvrvskj</p>
+                                            <span class="dev-role">Senior</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/nktnvrvskj" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="https://github.com/nktnvrvskj/nktnvrvskj" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <!-- Разработчик 6 -->
+                                <div class="dev-card">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/121222525?v=4" alt="Goro" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">Владислав</h4>
+                                            <p class="dev-github">@saburik2009</p>
+                                            <span class="dev-role">Junior</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/saburik2009" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="saburik2009.html" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="project-btn-container">
+                            <a href="https://github.com/muesimka/homee" target="_blank" class="project-btn">
+                                <i class="fas fa-rocket"></i> Перейти к проекту homee
+                            </a>
+                            <a href="https://github.com/btwyourethebest-wq/Project" target="_blank" class="project-btn">
+                                <i class="fas fa-rocket"></i> Перейти к проекту Project
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Команда 3 -->
+                    <div class="team-card animate-on-scroll">
+                        <div class="team-rank rank-3">3</div>
+                        
+                        <div class="team-header">
+                            <div class="team-name">
+                                <span>.....🎨 informatics-project</span>
+                                <span class="team-score">★ 9,200 очков</span>
+                            </div>
+                            <p class="team-tagline">Перспективный подход - первый год обучения</p>
+                        </div>
+                        
+                        <div class="team-achievements">
+                            <h3 class="achievements-title"><i class="fas fa-trophy"></i> Достижения команды</h3>
+                            <div class="achievements-list">
+                                <div class="achievement-badge"><i class="fas fa-paint-brush"></i> Комбинационные решения</div>
+                                <div class="achievement-badge"><i class="fas fa-mobile-alt"></i> Документация и планирование</div>
+                                <div class="achievement-badge"><i class="fas fa-heart"></i> 8+ contributors</div>
+                                <div class="achievement-badge"><i class="fas fa-heart"></i> 5+ merges</div>
+                                <div class="achievement-badge"><i class="fas fa-heart"></i> 35+ commits</div>
+                            </div>
+                        </div>
+                        
+                        <div class="developers-section">
+                            <h3 class="section-title"><i class="fas fa-users"></i> Топ-разработчики команды</h3>
+                            <div class="developers-grid">
+                                <!-- Разработчик 1 -->
+                                <div class="dev-card top-dev">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/234428070?v=4" alt="Pomedorchik52" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">Тимофей</h4>
+                                            <p class="dev-github">@Pomedorchik52</p>
+                                            <span class="dev-role">Teamlead</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/Pomedorchik52" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="https://github.com/Pomedorchik52/Pomedorchik52" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                
+                                <!-- Разработчик 2 -->
+                                <div class="dev-card top-dev">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/210902258?v=4" alt="500EFKA500" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">Эрлан</h4>
+                                            <p class="dev-github">@Erlan433</p>
+                                            <span class="dev-role">Senior</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/Erlan433" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="#" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                
+                                <!-- Разработчик 3 -->
+                                <div class="dev-card top-dev">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/254919419?v=4" alt="" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">Александр</h4>
+                                            <p class="dev-github">@englprobnik-code</p>
+                                            <span class="dev-role">Midlle</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/englprobnik-code" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="#" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+
+                                 <!-- Разработчик 4 -->
+                                 <div class="dev-card">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/235081090?s=400&v=4" alt="nikitakravets8-hub" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">Никита</h4>
+                                            <p class="dev-github">@nikitakravets8-hub</p>
+                                            <span class="dev-role">Midlle</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/nikitakravets8-hub" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="#" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <!-- Разработчик 5 -->
+                                <div class="dev-card">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/236754375?s=400&v=4" alt="SITOR1Burn" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">Елисей</h4>
+                                            <p class="dev-github">@SITOR1Burn</p>
+                                            <span class="dev-role">Junior</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/SITOR1Burn" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="#" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <!-- Разработчик 6 -->
+                                <div class="dev-card">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/234429535?v=4" alt="top1miraEzGG" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">Михаил</h4>
+                                            <p class="dev-github">@top1miraEzGG</p>
+                                            <span class="dev-role">Junior</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/top1miraEzGG" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="#" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <!-- Разработчик 7 -->
+                                <div class="dev-card">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/211516831?v=4" alt="fsduyx" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">Тейм</h4>
+                                            <p class="dev-github">@fsduyx</p>
+                                            <span class="dev-role">Junior</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/fsduyx" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="#" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Разработчик 8 -->
+                                <div class="dev-card">
+                                    <div class="dev-header">
+                                        <img src="https://avatars.githubusercontent.com/u/240366321?v=4" alt="KrossovkaEncore" class="dev-avatar">
+                                        <div class="dev-info">
+                                            <h4 class="dev-name">Илья</h4>
+                                            <p class="dev-github">@KrossovkaEncore</p>
+                                            <span class="dev-role">Senior</span>
+                                        </div>
+                                    </div>
+                                    <div class="dev-links">
+                                        <a href="https://github.com/KrossovkaEncore" target="_blank" class="btn btn-primary">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                        <a href="https://github.com/krossovkaEncore/krossovkaEncore" class="btn btn-secondary">
+                                            <i class="fas fa-user"></i> Резюме
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        
+                        
+                        <div class="project-btn-container">
+                            <a href="https://github.com/Pomedorchik52/informatics-project/tree/main" target="_blank" class="project-btn">
+                                <i class="fas fa-rocket"></i> Перейти к проекту 
+                                informatics-project
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="team-card animate-on-scroll">
+                        <div class="team-rank rank-1">🌟</div>
+                        
+                        <div class="team-header">
+                            <div class="team-name">
+                                <span>.....Ментор</span>
+                                
+                            </div>
+                            <p class="team-tagline">Руководитель проекта и ревьюер итоговых работ</p>
+                        </div>
+
+                        <div class="dev-card top-dev">
+                            <div class="dev-header">
+                                <img src="https://avatars.githubusercontent.com/u/145398532?s=400&v=4" alt="Valeev Serj" class="dev-avatar">
+                                <div class="dev-info">
+                                    <h4 class="dev-name">Valeev Serj</h4>
+                                    <p class="dev-github">@ValeevSerj</p>
+                                    <span class="dev-role">Teacher Computer Science</span>
+                                </div>
+                            </div>
+                            <div class="dev-links">
+                                <a href="https://github.com/Gabryelf" target="_blank" class="btn btn-primary">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                                <a href="../../intro/gabryelf_resume.html" class="btn btn-secondary">
+                                    <i class="fas fa-user"></i> Резюме
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-logo">🚀</div>
+            <p class="footer-text">Топ College — место, где рождаются технологические лидеры</p>
+            <p class="footer-text">© 2026 Top College Team. Все права защищены.</p>
+            
+            <a href="../../index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Вернуться на главную страницу
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        // Анимация при прокрутке
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('animated');
+                }
+            });
+        };
+
+        // Создание эффекта искр
+        const createSparkles = () => {
+            const sparkleCount = 30;
+            const container = document.querySelector('.container');
+            
+            for (let i = 0; i < sparkleCount; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = `${Math.random() * 100}vw`;
+                sparkle.style.top = `${Math.random() * 100}vh`;
+                sparkle.style.animationDelay = `${Math.random() * 5}s`;
+                sparkle.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                document.body.appendChild(sparkle);
+                
+                // Анимация движения искр
+                animateSparkle(sparkle);
+            }
+        };
+
+        const animateSparkle = (sparkle) => {
+            let x = parseFloat(sparkle.style.left);
+            let y = parseFloat(sparkle.style.top);
+            let xSpeed = (Math.random() - 0.5) * 0.2;
+            let ySpeed = (Math.random() - 0.5) * 0.2;
+            
+            const move = () => {
+                x += xSpeed;
+                y += ySpeed;
+                
+                // Возврат на другую сторону при выходе за границы
+                if (x < 0) x = 100;
+                if (x > 100) x = 0;
+                if (y < 0) y = 100;
+                if (y > 100) y = 0;
+                
+                sparkle.style.left = `${x}vw`;
+                sparkle.style.top = `${y}vh`;
+                
+                requestAnimationFrame(move);
+            };
+            
+            move();
+        };
+
+        // Переключение вида
+        const viewListBtn = document.getElementById('viewList');
+        const viewGridBtn = document.getElementById('viewGrid');
+        const viewStatsBtn = document.getElementById('viewStats');
+        const leaderboardContainer = document.getElementById('leaderboardContainer');
+
+        viewListBtn.addEventListener('click', () => {
+            viewListBtn.classList.add('active');
+            viewGridBtn.classList.remove('active');
+            viewStatsBtn.classList.remove('active');
+            leaderboardContainer.style.display = 'flex';
+            leaderboardContainer.style.flexDirection = 'column';
+        });
+
+        viewGridBtn.addEventListener('click', () => {
+            viewGridBtn.classList.add('active');
+            viewListBtn.classList.remove('active');
+            viewStatsBtn.classList.remove('active');
+            leaderboardContainer.style.display = 'grid';
+            leaderboardContainer.style.gridTemplateColumns = 'repeat(auto-fit, minmax(500px, 1fr))';
+            leaderboardContainer.style.gap = '30px';
+        });
+
+        viewStatsBtn.addEventListener('click', () => {
+            viewStatsBtn.classList.add('active');
+            viewListBtn.classList.remove('active');
+            viewGridBtn.classList.remove('active');
+            // Здесь можно добавить отображение статистики
+            alert('Статистика будет доступна в следующем обновлении!');
+        });
+
+        // Добавление эффекта пульсации к топ-командам
+        const topTeams = document.querySelectorAll('.rank-1, .rank-2, .rank-3');
+        topTeams.forEach(team => {
+            team.classList.add('pulse');
+        });
+
+        // Плавный скролл для якорей
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Инициализация
+        window.addEventListener('DOMContentLoaded', () => {
+            // Запуск анимации при загрузке
+            animateOnScroll();
+            
+            // Создание искр
+            createSparkles();
+            
+            // Запуск анимации при скролле
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Автоматическая анимация карточек при загрузке
+            setTimeout(() => {
+                const cards = document.querySelectorAll('.team-card');
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('animated');
+                    }, index * 200);
+                });
+            }, 500);
+            
+            // Анимация появления элементов
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Динамическое обновление очков (для эффекта)
+        function updateScores() {
+            const scores = document.querySelectorAll('.team-score');
+            scores.forEach(score => {
+                const currentScore = parseInt(score.textContent.match(/\d+/)[0]);
+                const newScore = currentScore + Math.floor(Math.random() * 10);
+                score.textContent = `★ ${newScore.toLocaleString()} очков`;
+                
+                // Анимация обновления
+                score.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    score.style.transform = 'scale(1)';
+                }, 300);
+            });
+        }
+
+        // Обновление очков каждые 10 секунд (для демонстрации)
+        setInterval(updateScores, 10000);
+    </script>
+</body>
+</html>
